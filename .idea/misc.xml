@@ -3,17 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/bg_hero.xml" value="0.3615" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/bg_tombol_putih.xml" value="0.3615" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/search_bg.xml" value="0.3615" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_account.xml" value="0.3484375" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_book.xml" value="0.3625" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_dashboard.xml" value="0.3625" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_home.xml" value="0.75" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/drawable/lengkung.xml" value="0.1465" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/drawable/lengkung_putih.xml" value="0.1465" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/activity_register.xml" value="0.21" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/lengkung.xml" value="0.1465" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/lengkung_putih.xml" value="0.1465" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_register.xml" value="0.21" />
       </map>
     </option>
   </component>
