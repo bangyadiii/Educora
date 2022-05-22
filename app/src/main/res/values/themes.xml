@@ -16,6 +16,5 @@
     </style>
     <style name="btn_primary" >
         <item name="backgroundColor">@color/blue_primary</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>
