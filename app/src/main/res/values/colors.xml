@@ -12,5 +12,7 @@
     <color name="grey_primary">#878787</color>
     <color name="kuning">#F1C73E</color>
     <color name="grey_secondary">#34155797</color>
+    <color name="grey_cerah">#F4F7FA</color>
     <color name="creamy">#EFACAE</color>
+    <color name="brown">#26202C</color>
 </resources>
