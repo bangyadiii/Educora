@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.MyBusiness.MyApp.R;
-import com.MyBusiness.MyApp.databinding.FragmentBookBinding;
+
+import com.example.coursera.R;
+import com.example.coursera.databinding.FragmentBookBinding;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class BookFragment extends Fragment {
         //      code recyclerview dari MainActivity-------------------------------------
         recyclerView = binding.recyclerView;
 
-        Integer[] langLogo = {R.drawable.book6,R.drawable.book2,R.drawable.book6};
+        Integer[] langLogo = {com.example.coursera.R.drawable.book6,R.drawable.book2,R.drawable.book6};
 
         String[] langName = {"Buku Fiksi", "Buku Non Fiksi", "Majalah"};
 
@@ -61,37 +62,8 @@ public class BookFragment extends Fragment {
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
 
-
-
-
-
     }
 
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        recyclerView = binding.recyclerView;
-//
-//        Integer[] langLogo = {R.drawable.book6,R.drawable.book2,R.drawable.book6};
-//
-//        String[] langName = {"Buku Fiksi", "Buku Non Fiksi", "Majalah"};
-//
-//        mainModels = new ArrayList<>();
-//        for (int i=0; i<langLogo.length; i++){
-//            Book model = new Book(langLogo[i], langName[i]);
-//            mainModels.add(model);
-//        }
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(
-//                container.getContext(),LinearLayoutManager.HORIZONTAL,false
-//        );
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//
-//        mainAdapter = new BookAdapter(getActivity().getApplicationContext(), mainModels);
-//
-//        recyclerView.setAdapter(mainAdapter);
-//    }
 
     @Override
     public void onDestroyView() {

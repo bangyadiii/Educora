@@ -47,9 +47,13 @@
         android:id="@+id/imagebutton"
         android:layout_width="251dp"
         android:layout_height="83dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/get_start_btn"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="618dp" />
+        android:contentDescription="@string/button_start"
+        app:layout_constraintEnd_toEndOf="@+id/subtitle"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
