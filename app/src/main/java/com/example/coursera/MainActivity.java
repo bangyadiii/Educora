@@ -2,15 +2,15 @@ package com.example.coursera;
 
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.coursera.databinding.ActivityMainBinding;
+import com.MyBusiness.MyApp.R;
+import com.MyBusiness.MyApp.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +32,29 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+//        code recyclerview---------------------------------------------------
+//        recyclerView = findViewById(R.id.recycler_view);
+//
+//        Integer[] langLogo = {R.drawable.book6,R.drawable.book2,R.drawable.book6};
+//
+//        String[] langName = {"Buku Fiksi", "Buku Non Fiksi", "Majalah"};
+//
+//        mainModels = new ArrayList<>();
+//        for (int i=0; i<langLogo.length; i++){
+//            MainModel model = new MainModel(langLogo[i], langName[i]);
+//            mainModels.add(model);
+//        }
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(
+//                MainActivity.this,LinearLayoutManager.HORIZONTAL,false
+//        );
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//
+//        mainAdapter = new MainAdapter(MainActivity.this, mainModels);
+//
+//        recyclerView.setAdapter(mainAdapter);
     }
 
 }
