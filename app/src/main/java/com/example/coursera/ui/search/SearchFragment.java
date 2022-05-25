@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.coursera.databinding.FragmentSearchBinding;
+import com.MyBusiness.MyApp.databinding.FragmentSearchBinding;
 
 
 public class SearchFragment extends Fragment {
