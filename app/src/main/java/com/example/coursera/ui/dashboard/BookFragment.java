@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.coursera.R;
-import com.example.coursera.databinding.FragmentBookBinding;
+import com.MyBusiness.MyApp.R;
+import com.MyBusiness.MyApp.databinding.FragmentBookBinding;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class BookFragment extends Fragment {
         //      code recyclerview dari MainActivity-------------------------------------
         recyclerView = binding.recyclerView;
 
-        Integer[] langLogo = {com.example.coursera.R.drawable.book6,R.drawable.book2,R.drawable.book6};
+        Integer[] langLogo = {R.drawable.book6,R.drawable.book2, R.drawable.book6};
 
         String[] langName = {"Buku Fiksi", "Buku Non Fiksi", "Majalah"};
 
