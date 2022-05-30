@@ -16,5 +16,11 @@
     </style>
     <style name="btn_primary" >
         <item name="backgroundColor">@color/blue_primary</item>
+    </style><style name="btn_white" >
+        <item name="backgroundColor">@color/white</item>
+    </style>
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 </resources>
