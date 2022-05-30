@@ -1,19 +1,29 @@
 package com.example.coursera.model;
 
 public class Book {
-    Integer langLogo;
-    String langName;
+    String title;
+    String description;
 
-    public Book(Integer langLogo, String langName){
-        this.langLogo = langLogo;
-        this.langName = langName;
+    public Book(){}
+
+    public Book(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
-    public Integer getLangLogo(){
-        return  langLogo;
+    public String getTitle() {
+        return title;
     }
 
-    public String getLangName(){
-        return langName;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
