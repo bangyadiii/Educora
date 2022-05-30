@@ -1,10 +1,9 @@
-package com.example.coursera.ui.dashboard;
+package com.example.coursera.ui.book;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyBusiness.MyApp.R;
 import com.MyBusiness.MyApp.databinding.FragmentBookBinding;
+import com.example.coursera.model.Book;
 
 import java.util.ArrayList;
 
@@ -27,8 +27,7 @@ public class BookFragment extends Fragment {
     ArrayList<Book> mainModels;
     BookAdapter mainAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         BookViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(BookViewModel.class);
 
@@ -58,8 +57,6 @@ public class BookFragment extends Fragment {
 
         recyclerView.setAdapter(mainAdapter);
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
 
     }

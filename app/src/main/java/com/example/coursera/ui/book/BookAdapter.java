@@ -1,4 +1,4 @@
-package com.example.coursera.ui.dashboard;
+package com.example.coursera.ui.book;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.MyBusiness.MyApp.R;
+import com.example.coursera.model.Book;
 
 import java.util.ArrayList;
 

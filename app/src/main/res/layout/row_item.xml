@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Futurama"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
 
     </LinearLayout>

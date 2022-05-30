@@ -1,4 +1,4 @@
-package com.example.coursera.ui.dashboard;
+package com.example.coursera.model;
 
 public class Book {
     Integer langLogo;
