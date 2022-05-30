@@ -1,10 +1,12 @@
 package com.example.coursera;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class register extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.MyBusiness.MyApp.R;
+
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

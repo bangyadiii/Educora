@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/home_nav_selector"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_book"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/book_nav_selector"
         android:title="@string/title_book" />
 
     <item
+        android:id="@+id/nav_kosong"
+        android:title="" />
+    <item
         android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/search_nav_selector"
         android:title="@string/title_searcg" />
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/ic_outline_account_circle_24"
+        android:icon="@drawable/account_nav_selector"
         android:title="@string/title_account" />
 
 </menu>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "132330019123",
+    "project_id": "educora-29dc6",
+    "storage_bucket": "educora-29dc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132330019123:android:095631fedd45c6c7b78646",
+        "android_client_info": {
+          "package_name": "com.example.coursera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132330019123-3s238pb8o8nbn95ktdlto8sbra2civiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoP8zeAImVHgoopwBLN0s8Za4v1WInm2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132330019123-3s238pb8o8nbn95ktdlto8sbra2civiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

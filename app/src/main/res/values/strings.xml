@@ -6,4 +6,6 @@
     <string name="title_account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_start">button start</string>
+    <string name="add_floating_button_main_activity">add floating button main activity</string>
 </resources>
