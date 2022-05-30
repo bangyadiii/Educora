@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFC">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/Rectangle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-206dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="354dp"
+        android:layout_height="387dp"
+        android:src="@drawable/illustration_1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <TextView
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Educora."
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="427dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:text="Hello, there"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:textStyle="normal"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="527dp" />
+
+    <ImageButton
+        android:id="@+id/imagebutton"
+        android:layout_width="350dp"
+        android:layout_height="117dp"
+        android:background="@drawable/get_login_btn"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <ImageButton
+        android:id="@+id/imagebutton2"
+        android:layout_width="350dp"
+        android:layout_height="117dp"
+        android:background="@drawable/get_register_btn"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="624dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
