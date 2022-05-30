@@ -3,65 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.163" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/bg_hero.xml" value="0.3615" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/bg_tombol_putih.xml" value="0.3615" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/ic_account.xml" value="0.163" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.163" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.163" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/ic_launcher_background.xml" value="0.163" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.163" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/drawable/search_bg.xml" value="0.3615" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_login.xml" value="0.3625" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_start.xml" value="0.264" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_account.xml" value="0.3484375" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_book.xml" value="0.22826086956521738" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_book.xml" value="0.3625" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_dashboard.xml" value="0.3625" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/fragment_search.xml" value="0.22826086956521738" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/layout/layout.xml" value="0.22826086956521738" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/account_nav_selector.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/book_nav_selector.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/home_nav_selector.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_account_icon.xml" value="0.192" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_account_icon_checked.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_book_icon.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_book_icon_checked.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_group_175_4_.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_home_icon.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_home_icon_checked.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_search_icon.xml" value="0.192" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/ic_search_icon_checked.xml" value="0.192" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/lengkung_putih.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/search_bg.xml" value="0.363" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/drawable/search_nav_selector.xml" value="0.362" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout-v31/fragment_home.xml" value="0.4829742876997915" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/activity_login.xml" value="0.31929347826086957" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/activity_start.xml" value="0.33" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/class_item.xml" value="0.31929347826086957" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_account.xml" value="0.32065217391304346" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_book.xml" value="0.25" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_book_detail.xml" value="0.18" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_course_detail.xml" value="0.32065217391304346" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_course_detail_list.xml" value="0.32065217391304346" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_home.xml" value="0.5" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_materi.xml" value="0.27729772191673213" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/fragment_search.xml" value="0.31929347826086957" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/materi_item.xml" value="0.5" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/progress_class_item.xml" value="0.25" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/layout/row_item.xml" value="0.31929347826086957" />
-        <entry key="..\:/Programming/FrontEnd/Mobile/Educora/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3619791666666667" />
+        <entry key="..\:/Programming/FrontEnd/Mobile/Coursera/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/drawable/lengkung.xml" value="0.1465" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/drawable/lengkung_putih.xml" value="0.1465" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout-v31/fragment_home.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/activity_register.xml" value="0.21" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/fragment_book.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/fragment_edit_profile.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/fragment_home.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/fragment_materi.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/layout/progress_class_item.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Educora/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1465" />
       </map>
     </option>
   </component>
