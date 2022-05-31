@@ -29,6 +29,7 @@ public class HomeViewModel extends AndroidViewModel {
     public void getCourse(String uid){
         courseRepository.getCourse(uid);
     }
+
     public Query getMateriByCourse(String course_id){
         return courseRepository.getMateriByCourse(course_id);
     }

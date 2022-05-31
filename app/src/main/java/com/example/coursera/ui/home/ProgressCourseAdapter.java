@@ -1,6 +1,7 @@
 package com.example.coursera.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, Prog
 //            NavOptions navOptions = new NavOptions.Builder()
 //                    .setPopUpTo(R.id.navigation_home, true)
 //                    .build();
-//
+            Log.d("model", model.toString());
             Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(R.id.action_navigation_home_to_detail_course);
 
         });

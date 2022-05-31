@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.MyBusiness.MyApp.databinding.FragmentHomeBinding;
 import com.example.coursera.model.Course;
+import com.example.coursera.ui.helper.VerticalSpaceItemDecoration;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
@@ -29,7 +30,7 @@ public class HomeFragment extends Fragment {
 
         setProgressCourseAdapter();
 
-        View root = binding.getRoot();
+            View root = binding.getRoot();
         return root;
     }
     @Override
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
         );
         binding.progressClassRecyclerView.setLayoutManager(layoutManager);
         binding.progressClassRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        binding.progressClassRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
 
         FirestoreRecyclerOptions<Course> options = new FirestoreRecyclerOptions.Builder<Course>()
                 .setQuery(homeViewModel.getAllCourses(), Course.class)

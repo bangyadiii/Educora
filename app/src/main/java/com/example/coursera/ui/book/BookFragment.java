@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,10 +25,6 @@ import java.util.ArrayList;
 public class BookFragment extends Fragment {
 
     private FragmentBookBinding binding;
-    private FirebaseFirestore firebaseFirestore;
-    ProgressCourseAdapter progressCourseAdapter;
-    RecyclerView recyclerView;
-    ArrayList<Book> mainModels;
     BookAdapter mainAdapter;
     BookViewModel dashboardViewModel;
 
@@ -40,7 +37,6 @@ public class BookFragment extends Fragment {
 
         //      code recyclerview dari MainActivity-------------------------------------
 //        firebaseFirestore = FirebaseFirestore.getInstance();
-        recyclerView = binding.recyclerView;
 
 //        //Query
 //        Query query = firebaseFirestore.collection("Book");
@@ -80,11 +76,16 @@ public class BookFragment extends Fragment {
 //        mainAdapter = new BookAdapter(getContext(), mainModels);
 //
 //        recyclerView.setAdapter(mainAdapter);
-        setBooksAdapter();
+
         return root;
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setBooksAdapter();
+    }
 
     @Override
     public void onDestroyView() {

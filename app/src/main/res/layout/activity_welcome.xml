@@ -8,12 +8,13 @@
     android:background="#FAFAFC">
 
     <ImageView
+        android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/Rectangle"
+        android:src="@drawable/rectangle123"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-206dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="-206dp" />
 
     <ImageView
         android:layout_width="354dp"
@@ -24,42 +25,47 @@
         tools:layout_editor_absoluteY="33dp" />
 
     <TextView
+        android:id="@+id/textView12"
         android:layout_width="219dp"
         android:layout_height="wrap_content"
         android:text="Welcome to Educora."
         android:textColor="@color/black"
         android:textSize="36sp"
         android:textStyle="bold"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="427dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="427dp" />
 
     <TextView
+        android:id="@+id/textView11"
         android:layout_width="219dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="Hello, there"
         android:textColor="@color/black"
         android:textSize="19sp"
         android:textStyle="normal"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="527dp" />
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <ImageButton
         android:id="@+id/imagebutton"
         android:layout_width="350dp"
         android:layout_height="117dp"
         android:background="@drawable/get_login_btn"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="561dp" />
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/imagebutton2"
         android:layout_width="350dp"
         android:layout_height="117dp"
         android:background="@drawable/get_register_btn"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="624dp" />
+        app:layout_constraintEnd_toEndOf="@+id/imagebutton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imagebutton"
+        app:layout_constraintTop_toBottomOf="@+id/imagebutton"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

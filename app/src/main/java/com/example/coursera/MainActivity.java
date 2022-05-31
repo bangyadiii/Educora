@@ -1,6 +1,9 @@
 package com.example.coursera;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -9,7 +12,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.MyBusiness.MyApp.R;
 import com.MyBusiness.MyApp.databinding.ActivityMainBinding;
+import com.MyBusiness.MyApp.databinding.LayoutBottomSheetBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +37,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        binding.floatingActionButton.setOnClickListener(view -> {
+            showBottomSheet();
+        });
+
+
+    }
+
+    private void showBottomSheet(){
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this, com.google.android.material.R.style.Theme_Design_BottomSheetDialog);
+//        LayoutBottomSheetBinding binding = LayoutBottomSheetBinding.inflate(getLayoutInflater());
+        View bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet, (LinearLayout) findViewById(R.id.bottom_sheet_container));
+
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
 
     }
 
