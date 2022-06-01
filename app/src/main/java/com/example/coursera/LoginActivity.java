@@ -28,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth  = FirebaseAuth.getInstance();
 
+        binding.createAccount.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
         binding.tblLogin.setOnClickListener(v-> {
             String email = binding.emailEdit.getText().toString();
             String password = binding.passEdit.getText().toString();
