@@ -6,19 +6,17 @@ public class User {
     private String name;
     private String username;
     private String noHP;
-    private String alamat;
 
     public User() {
 
     }
 
-    public User(String uid, String email, String name, String username, String noHP, String alamat) {
+    public User(String uid, String email, String name, String username, String noHP) {
         this.uid = uid;
         this.email = email;
         this.name = name;
         this.username = username;
         this.noHP = noHP;
-        this.alamat = alamat;
     }
 
     public String getName() {
@@ -43,14 +41,6 @@ public class User {
 
     public void setNoHP(String noHP) {
         this.noHP = noHP;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
     }
 
     public String getEmail() {
