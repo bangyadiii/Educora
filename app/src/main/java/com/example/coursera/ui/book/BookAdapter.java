@@ -27,17 +27,10 @@ public class BookAdapter extends FirestoreRecyclerAdapter<Book, BookAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
         RowItemBinding rowItemBinding = RowItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
         return new ViewHolder(rowItemBinding.getRoot());
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.imageView.setImageResource(mainModels.get(position).getLangLogo());
-//
-//        holder.textView.setText(mainModels.get(position).getLangName());
-//    }
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Book model) {
