@@ -5,16 +5,26 @@ import android.app.Application;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class BookRepository {
     public String BASE_COLLECTION = "Book";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
     private CollectionReference bookRef = db.collection(BASE_COLLECTION);
     private CollectionReference bookRef1 = db.collection("Book");
     private Application app;
 
+
     public BookRepository(Application app) {
         this.app = app;
+    }
+
+    public void getBookImage(String image){
+        StorageReference fotoRef = storageReference.child(image);
+
     }
 
     public Query getAllbooks(){
