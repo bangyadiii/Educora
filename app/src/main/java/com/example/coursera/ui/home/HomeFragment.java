@@ -11,7 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.MyBusiness.MyApp.databinding.FragmentHomeBinding;
+
+import com.example.coursera.databinding.FragmentHomeBinding;
 import com.example.coursera.model.Course;
 import com.example.coursera.ui.helper.VerticalSpaceItemDecoration;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;

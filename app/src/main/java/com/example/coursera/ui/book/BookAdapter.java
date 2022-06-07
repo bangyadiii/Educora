@@ -9,8 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.MyBusiness.MyApp.R;
-import com.MyBusiness.MyApp.databinding.RowItemBinding;
+
+import com.example.coursera.R;
+import com.example.coursera.databinding.RowItemBinding;
 import com.example.coursera.model.Book;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;

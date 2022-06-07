@@ -10,9 +10,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.MyBusiness.MyApp.R;
-import com.MyBusiness.MyApp.databinding.ActivityMainBinding;
-import com.MyBusiness.MyApp.databinding.LayoutBottomSheetBinding;
+
+
+import com.example.coursera.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 

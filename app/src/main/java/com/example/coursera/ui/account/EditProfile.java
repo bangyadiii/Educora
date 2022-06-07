@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.MyBusiness.MyApp.R;
+import com.example.coursera.R;
+
+
 //import com.example.coursera.R;
 
 /**

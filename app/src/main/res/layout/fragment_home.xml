@@ -64,16 +64,43 @@
                         app:layout_constraintStart_toStartOf="@+id/textView"
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="97dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/bg_tombol_putih"
-                        android:text="Categories"
-                        android:textColor="@color/blue_primary"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="10dp"
                         app:layout_constraintStart_toStartOf="@+id/textHome"
-                        app:layout_constraintTop_toBottomOf="@+id/textHome" />
+                        app:layout_constraintTop_toBottomOf="@+id/textHome">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="5dp">
+
+                            <TextView
+                                android:id="@+id/textView13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Category"
+                                android:textColor="@color/blue_primary"
+                                android:textSize="10sp" />
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_weight="0.2"
+                                android:backgroundTintMode="add"
+                                android:hapticFeedbackEnabled="false"
+                                app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

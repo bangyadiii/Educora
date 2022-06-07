@@ -15,9 +15,8 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.MyBusiness.MyApp.R;
-
-import com.MyBusiness.MyApp.databinding.ProgressClassItemBinding;
+import com.example.coursera.R;
+import com.example.coursera.databinding.ProgressClassItemBinding;
 import com.example.coursera.model.Course;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;

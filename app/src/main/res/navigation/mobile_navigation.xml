@@ -23,6 +23,16 @@
         android:label="detail course"
         tools:layout="@layout/fragment_materi" >
 
+        <action
+            android:id="@+id/action_detail_course_to_detail_materi"
+            app:destination="@id/detail_materi" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_materi"
+        android:name="com.example.coursera.ui.home.MateriDetailFragment"
+        android:label="detail course"
+        tools:layout="@layout/fragment_materi_detail" >
+
     </fragment>
 
     <fragment

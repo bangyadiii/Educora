@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.MyBusiness.MyApp.databinding.FragmentBookBinding;
+import com.example.coursera.databinding.FragmentBookBinding;
 import com.example.coursera.model.Book;
 import com.example.coursera.ui.home.ProgressCourseAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;

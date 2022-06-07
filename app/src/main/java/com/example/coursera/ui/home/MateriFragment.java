@@ -13,9 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.MyBusiness.MyApp.R;
-import com.MyBusiness.MyApp.databinding.FragmentHomeBinding;
-import com.MyBusiness.MyApp.databinding.FragmentMateriBinding;
+import com.example.coursera.databinding.FragmentMateriBinding;
 import com.example.coursera.model.Course;
 import com.example.coursera.model.Materi;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
