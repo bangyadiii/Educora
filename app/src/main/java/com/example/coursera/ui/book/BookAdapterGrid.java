@@ -8,10 +8,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.MyBusiness.MyApp.databinding.RowItemGridBinding;
+//import com.MyBusiness.MyApp.databinding.RowItemGridBinding;
 import com.bumptech.glide.Glide;
+import com.example.coursera.R;
+import com.example.coursera.databinding.RowItemGridBinding;
 import com.example.coursera.model.Book;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -75,8 +78,11 @@ public class BookAdapterGrid extends FirestoreRecyclerAdapter<Book, BookAdapterG
         }catch (IOException e) {
             e.printStackTrace();
         }
-//        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/educora-29dc6.appspot.com/o/book_t_1.png?alt=media&token=ecd3006e-287c-41f6-aeb8-bea703d9248d")
-//                .into(holder.getRowItemBinding().imageView);
+        holder.rowItemBinding.bookItemSmall.setOnClickListener(view -> {
+            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(R.id.action_navigation_book_to_bookDetailFragment);
+
+        });
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

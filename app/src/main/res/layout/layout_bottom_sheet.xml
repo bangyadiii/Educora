@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
+    android:background="@drawable/bg_bottom_sheet"
     android:paddingVertical="10dp"
+    android:paddingHorizontal="20dp"
     android:orientation="vertical">
 
     <TextView
@@ -23,7 +25,9 @@
         android:id="@+id/bt_tambah_course"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="5dp"
+        android:clickable="true"
         android:backgroundTint="@color/grey_cerah"
         app:cardCornerRadius="15dp">
 
@@ -57,6 +61,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:backgroundTint="@color/grey_cerah"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="5dp"
+        android:clickable="true"
         app:cardCornerRadius="15dp">
 
         <LinearLayout

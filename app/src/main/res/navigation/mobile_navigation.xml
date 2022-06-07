@@ -39,7 +39,12 @@
         android:id="@+id/navigation_book"
         android:name="com.example.coursera.ui.book.BookFragment"
         android:label="@string/title_book"
-        tools:layout="@layout/fragment_book" />
+        tools:layout="@layout/fragment_book" >
+        <action
+            android:id="@+id/action_navigation_book_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_search"
@@ -51,4 +56,9 @@
         android:name="com.example.coursera.ui.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.example.coursera.ui.book.BookDetailFragment"
+        android:label="BookDetailFragment"
+        tools:layout="@layout/fragment_book_detail" />
 </navigation>

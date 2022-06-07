@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
 
         setProgressCourseAdapter();
 
-            View root = binding.getRoot();
+        View root = binding.getRoot();
         return root;
     }
     @Override

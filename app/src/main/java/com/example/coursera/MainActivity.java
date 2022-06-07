@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -13,12 +14,14 @@ import androidx.navigation.ui.NavigationUI;
 
 
 import com.example.coursera.databinding.ActivityMainBinding;
+import com.example.coursera.databinding.LayoutBottomSheetBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private LayoutBottomSheetBinding bottomSheetBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
     private void showBottomSheet(){
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this, com.google.android.material.R.style.Theme_Design_BottomSheetDialog);
 //        LayoutBottomSheetBinding binding = LayoutBottomSheetBinding.inflate(getLayoutInflater());
-        View bottomSheetView = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet, (LinearLayout) findViewById(R.id.bottom_sheet_container));
+        bottomSheetBinding = LayoutBottomSheetBinding.inflate(getLayoutInflater());
 
-        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.setContentView(bottomSheetBinding.getRoot());
         bottomSheetDialog.show();
 
     }
+
 
 }
