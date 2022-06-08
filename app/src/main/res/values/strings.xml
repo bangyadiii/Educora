@@ -9,4 +9,6 @@
     <string name="button_start">button start</string>
     <string name="add_floating_button_main_activity">add floating button main activity</string>
     <string name="change_profile"><u>Change Profile</u></string>
+    <string name="judul_buku">Judul Buku</string>
+    <string name="isi_buku">Isi Buku</string>
 </resources>
