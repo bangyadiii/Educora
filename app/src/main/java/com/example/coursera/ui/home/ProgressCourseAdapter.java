@@ -39,6 +39,17 @@ import java.io.IOException;
 public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, ProgressCourseAdapter.CourseItemHolder> {
     AppCompatActivity context;
 
+
+    public AppCompatActivity getContext() {
+        return context;
+    }
+
+    public void setContext(AppCompatActivity context) {
+        this.context = context;
+    }
+
+
+
     public ProgressCourseAdapter(@NonNull FirestoreRecyclerOptions<Course> options) {
         super(options);
     }

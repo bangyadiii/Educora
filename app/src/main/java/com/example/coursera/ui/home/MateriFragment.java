@@ -55,7 +55,7 @@ public class MateriFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentMateriBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        setMateriAdapter();
         return root;
 
     }
@@ -63,23 +63,24 @@ public class MateriFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setMateriAdapter();
+//        setMateriAdapter();
 
     }
 
 
 
     public void setMateriAdapter(){
-
+        String course_id = getArguments().getString("course_id");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         binding.rvMateri.setLayoutManager(layoutManager);
         binding.rvMateri.setItemAnimator(new DefaultItemAnimator());
         binding.rvMateri.setHasFixedSize(true);
         FirestoreRecyclerOptions<Materi> options = new FirestoreRecyclerOptions.Builder<Materi>()
-                .setQuery(homeViewModel.getMateriByCourse("4G1u2hu1gpmU7QabKkUf"), Materi.class)
+                .setQuery(homeViewModel.getMateriByCourse(course_id), Materi.class)
                 .build();
 
         adapter = new MateriAdapter(options);
+        adapter.setCourse_id(course_id);
 
         binding.rvMateri.setAdapter(adapter);
 

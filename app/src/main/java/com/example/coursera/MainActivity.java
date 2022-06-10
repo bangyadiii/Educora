@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.coursera.databinding.ActivityMainBinding;
 import com.example.coursera.databinding.LayoutBottomSheetBinding;
+import com.example.coursera.ui.home.MateriDetailFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = binding.navView;
         navView.setItemIconTintList(null);
         navView.setBackground(null);
+
+
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_book, R.id.navigation_search, R.id.navigation_account)

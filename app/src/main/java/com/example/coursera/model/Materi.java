@@ -1,6 +1,9 @@
 package com.example.coursera.model;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class Materi {
+    @DocumentId
     private String id;
     private String title;
     private String description;
@@ -15,12 +18,12 @@ public class Materi {
     public Materi() {
     }
 
-    public String getUid() {
+    public String getId() {
         return id;
     }
 
-    public void setUid(String uid) {
-        this.id = uid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
