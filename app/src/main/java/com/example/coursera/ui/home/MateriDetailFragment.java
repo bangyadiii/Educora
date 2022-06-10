@@ -140,7 +140,6 @@ public class MateriDetailFragment extends Fragment  {
 
         adapter = new MateriDetailAdapter(options);
         adapter.setCourse_id(course_id);
-        adapter.setProgressBar(binding.progressBar);
 
         binding.rvMateriInDetail.setAdapter(adapter);
     }
@@ -342,7 +341,8 @@ public class MateriDetailFragment extends Fragment  {
     public void onStart() {
         super.onStart();
         adapter.startListening();
-        ;
+        binding.pbRecyclerMateri.setVisibility(View.GONE);
+
     }
 
     @Override

@@ -20,7 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, MateriDetailAdapter.MateriItemHolder> {
     AppCompatActivity context;
-    ProgressBar progressBar;
+
 
     public AppCompatActivity getContext() {
         return context;
@@ -30,13 +30,7 @@ public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, Materi
         this.context = context;
     }
 
-    public ProgressBar getProgressBar() {
-        return progressBar;
-    }
 
-    public void setProgressBar(ProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
 
     public MateriDetailAdapter(@NonNull FirestoreRecyclerOptions<Materi> options) {
         super(options);
@@ -55,9 +49,6 @@ public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, Materi
     public void onDataChanged() {
         super.onDataChanged();
 
-        if (progressBar != null && progressBar.getVisibility() == View.VISIBLE) {
-            progressBar.setVisibility(View.GONE);
-        }
 
     }
 

@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.coursera.databinding.ActivityLoginBinding;
+
+import com.example.coursera.ui.helper.LoadingDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,15 +50,15 @@ public class LoginActivity extends AppCompatActivity {
         if(!validateForm()) {
             return;
         }
+        LoadingDialog loadingDialog = new LoadingDialog(LoginActivity.this);
+        loadingDialog.startLoadingDialog();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                loadingDialog.dissmisDialog();
                 if(task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
                     updateUI(user);
-
-                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-
                 }
                 else {
                     Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();

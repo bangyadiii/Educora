@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class EditProfile extends Fragment {
+public class EditProfileFragment extends Fragment {
     FragmentEditProfileBinding binding;
     private User user;
     public static int RC_TAKE_PHOTO = 10;
@@ -40,7 +40,7 @@ public class EditProfile extends Fragment {
     Activity app;
 
 
-    public EditProfile() {
+    public EditProfileFragment() {
         // Required empty public constructor
     }
 
