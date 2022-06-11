@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.coursera.R;
 import com.example.coursera.databinding.FragmentEditProfileBinding;
 import com.example.coursera.model.User;
@@ -139,7 +140,8 @@ public class EditProfileFragment extends Fragment {
 
                 Bitmap bitmap = (Bitmap) bundle.get("data");
                 binding.avatar.post(() -> {
-                    binding.avatar.setImageBitmap(bitmap);
+                    Glide.with(app).load(bitmap).into(binding.avatar);
+                    //binding.avatar.setImageBitmap(bitmap);
 
                 });
 
