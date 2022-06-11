@@ -89,11 +89,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         // membuat User admin baru
         String nama = edtNama.getText().toString();
         String noTelp = edtTelp.getText().toString();
-        writeNewUser(user.getUid(), user.getEmail(),nama,username, noTelp);
+        User user1 = writeNewUser(user.getUid(), user.getEmail(),nama,username, noTelp);
 
         // Go to MainActivity
-        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-        finish();
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user",user1);
+        startActivity(intent);
+//        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+//        finish();
     }
 
     /*
@@ -129,11 +133,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     // menulis ke Database
-    private void writeNewUser(String uid, String email, String name, String username, String noHP) {
+    private User writeNewUser(String uid, String email, String name, String username, String noHP) {
         User user = new User(uid,email,name,username,noHP);
 
         mDatabase.collection("users").add(user);
         //mDatabase.child("users").child(userId).setValue(user);
+        return user;
     }
 
     @Override
