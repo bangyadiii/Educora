@@ -21,6 +21,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, MateriDetailAdapter.MateriItemHolder> {
     AppCompatActivity context;
 
+    static ItemClickListener listener;
 
     public AppCompatActivity getContext() {
         return context;
@@ -30,6 +31,14 @@ public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, Materi
         this.context = context;
     }
 
+
+    public void setVideoOnItemClickListener(ItemClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface ItemClickListener{
+        void setVideo(Materi materi);
+    }
 
 
     public MateriDetailAdapter(@NonNull FirestoreRecyclerOptions<Materi> options) {
@@ -45,12 +54,6 @@ public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, Materi
         this.course_id = course_id;
     }
 
-    @Override
-    public void onDataChanged() {
-        super.onDataChanged();
-
-
-    }
 
     @Override
     protected void onBindViewHolder(@NonNull MateriDetailAdapter.MateriItemHolder holder, int position, @NonNull Materi model) {
@@ -58,13 +61,14 @@ public class MateriDetailAdapter extends FirestoreRecyclerAdapter<Materi, Materi
         Log.d("adapter", String.valueOf(position));
         holder.getBinding().tvTitle.setText(model.getTitle());
         holder.getBinding().tvDescriptionForMateri.setText(model.getDescription());
-//        holder.getBinding().cvMateri.setOnClickListener(view -> {
+        holder.getBinding().cvMateri.setOnClickListener(view -> {
+            listener.setVideo(model);
 //
 //            NavDirections action = (NavDirections) MateriFragmentDirections.actionDetailCourseToDetailMateri(model.getId(), model.getTitle(), model.getDescription(), getCourse_id());
 //
 //            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
 //
-//        });
+        });
 
     }
 

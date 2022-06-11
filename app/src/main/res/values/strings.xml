@@ -17,4 +17,5 @@
     <string name="exo_track_selection_title_audio">ini audio</string>
     <string name="exo_track_selection_title_text">ini text</string>
     <string name="edit_account_fragment">edit account fragment</string>
+    <string name="course_details"><b>Course</b> Details</string>
 </resources>

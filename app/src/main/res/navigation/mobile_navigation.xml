@@ -31,6 +31,7 @@
         <argument
             android:name="course_id"
             app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/detail_materi"
@@ -39,14 +40,8 @@
         tools:layout="@layout/fragment_materi_detail" >
 
         <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
+            android:name="materi"
+            app:argType="com.example.coursera.model.Materi" />
         <argument
             android:name="course_id"
             app:argType="string" />

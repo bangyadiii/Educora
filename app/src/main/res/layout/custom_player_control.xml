@@ -100,7 +100,8 @@
             android:layout_height="32dp"
             android:layout_marginLeft="4dp"
             android:layout_weight="0"
-            android:src="@drawable/settings" />
+            android:src="@drawable/settings"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/exo_fullscreen_button"

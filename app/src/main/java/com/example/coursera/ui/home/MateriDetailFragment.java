@@ -71,6 +71,7 @@ public class MateriDetailFragment extends Fragment  {
     ImageView fullScreen;
     HomeViewModel homeViewModel;
 
+
     public boolean isFullScreen = false;
     SimpleExoPlayer player;
     ProgressBar progressBar;
@@ -99,6 +100,7 @@ public class MateriDetailFragment extends Fragment  {
                         .getInstance(getActivity().getApplication()))
                 .get(HomeViewModel.class);
         binding = FragmentMateriDetailBinding.inflate(inflater);
+
         setAdapter();
         return  binding.getRoot();
     }
@@ -106,12 +108,15 @@ public class MateriDetailFragment extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        setVideo();
+        if(getArguments() != null){
+            Materi materi = getArguments().getParcelable("materi");
+            setVideo(materi);
+        }
 
     }
 
     private void setAdapter() {
+
         binding.pbRecyclerMateri.setVisibility(View.VISIBLE);
         String course_id = getArguments().getString("course_id");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()){
@@ -140,15 +145,19 @@ public class MateriDetailFragment extends Fragment  {
 
         adapter = new MateriDetailAdapter(options);
         adapter.setCourse_id(course_id);
+        adapter.setVideoOnItemClickListener((materi) -> {
+            player.release();
+            setVideo(materi);
+
+        });
 
         binding.rvMateriInDetail.setAdapter(adapter);
     }
 
-    public void setVideo(){
-
+    public void setVideo(Materi materi){
 
         AppCompatActivity app = (AppCompatActivity) requireContext();
-        StorageReference mStorageReference= FirebaseStorage.getInstance().getReference().child("video_materi/2022-04-07 20-20-58.mp4");
+        StorageReference mStorageReference= FirebaseStorage.getInstance().getReference().child(materi.getMateri_video());
         trackSelector = new DefaultTrackSelector(app);
         player = new SimpleExoPlayer.Builder(app).setTrackSelector(trackSelector).build();
         playerView =  app.findViewById(R.id.playerView);

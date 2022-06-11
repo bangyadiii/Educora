@@ -237,30 +237,30 @@ public final class TrackSelectionDialog extends DialogFragment {
   @Override
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View dialogView = inflater.inflate(R.layout.track_selection_dialog, container, false);
-    TabLayout tabLayout = dialogView.findViewById(R.id.track_selection_dialog_tab_layout);
-    ViewPager viewPager = dialogView.findViewById(R.id.track_selection_dialog_view_pager);
-    Button cancelButton = dialogView.findViewById(R.id.track_selection_dialog_cancel_button);
-    Button okButton = dialogView.findViewById(R.id.track_selection_dialog_ok_button);
-    viewPager.setAdapter(new FragmentAdapter(getChildFragmentManager()));
-    tabLayout.setupWithViewPager(viewPager);
-    tabLayout.setVisibility(tabFragments.size() > 1 ? View.VISIBLE : View.GONE);
-    cancelButton.setOnClickListener(view -> dismiss());
-    okButton.setOnClickListener(
-        view -> {
-          onClickListener.onClick(getDialog(), DialogInterface.BUTTON_POSITIVE);
-          dismiss();
-        });
-    return dialogView;
-  }
+          View dialogView = inflater.inflate(R.layout.track_selection_dialog, container, false);
+          TabLayout tabLayout = dialogView.findViewById(R.id.track_selection_dialog_tab_layout);
+          ViewPager viewPager = dialogView.findViewById(R.id.track_selection_dialog_view_pager);
+          Button cancelButton = dialogView.findViewById(R.id.track_selection_dialog_cancel_button);
+          Button okButton = dialogView.findViewById(R.id.track_selection_dialog_ok_button);
+          viewPager.setAdapter(new FragmentAdapter(getChildFragmentManager()));
+          tabLayout.setupWithViewPager(viewPager);
+          tabLayout.setVisibility(tabFragments.size() > 1 ? View.VISIBLE : View.GONE);
+          cancelButton.setOnClickListener(view -> dismiss());
+          okButton.setOnClickListener(
+              view -> {
+                onClickListener.onClick(getDialog(), DialogInterface.BUTTON_POSITIVE);
+                dismiss();
+              });
+          return dialogView;
+      }
 
-  private static boolean showTabForRenderer(MappedTrackInfo mappedTrackInfo, int rendererIndex) {
-    TrackGroupArray trackGroupArray = mappedTrackInfo.getTrackGroups(rendererIndex);
-    if (trackGroupArray.length == 0) {
-      return false;
-    }
-    int trackType = mappedTrackInfo.getRendererType(rendererIndex);
-    return isSupportedTrackType(trackType);
+      private static boolean showTabForRenderer(MappedTrackInfo mappedTrackInfo, int rendererIndex) {
+        TrackGroupArray trackGroupArray = mappedTrackInfo.getTrackGroups(rendererIndex);
+        if (trackGroupArray.length == 0) {
+          return false;
+        }
+        int trackType = mappedTrackInfo.getRendererType(rendererIndex);
+        return isSupportedTrackType(trackType);
   }
 
   private static boolean isSupportedTrackType(int trackType) {
@@ -352,7 +352,7 @@ public final class TrackSelectionDialog extends DialogFragment {
         @Nullable Bundle savedInstanceState) {
       View rootView =
           inflater.inflate(
-              R.layout.track_selection_dialog, container, false);
+              R.layout.custom_player_control, container, false);
       TrackSelectionView trackSelectionView = rootView.findViewById(R.id.exo_track_selection_view);
       trackSelectionView.setShowDisableOption(true);
       trackSelectionView.setAllowMultipleOverrides(allowMultipleOverrides);

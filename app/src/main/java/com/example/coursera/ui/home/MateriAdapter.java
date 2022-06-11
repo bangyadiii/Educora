@@ -44,14 +44,15 @@ public class MateriAdapter extends FirestoreRecyclerAdapter<Materi, MateriAdapte
     }
     @Override
     protected void onBindViewHolder(@NonNull MateriItemHolder holder, int position, @NonNull Materi model) {
-        Log.e("adapter",model.toString());
-        Log.d("adapter", String.valueOf(position));
+        model.setCourse_id(course_id);
         holder.getBinding().tvTitle.setText(model.getTitle());
         holder.getBinding().tvDescriptionForMateri.setText(model.getDescription());
         holder.getBinding().cvMateri.setOnClickListener(view -> {
+//            Log.d("gg",model.getId());
+            Log.d("gg",model.getTitle());
+            Log.d("gg","course id: " + model.getCourse_id());
 
-            NavDirections action = (NavDirections) MateriFragmentDirections.actionDetailCourseToDetailMateri(model.getId(), model.getTitle(), model.getDescription(), getCourse_id() );
-
+            NavDirections action = (NavDirections) MateriFragmentDirections.actionDetailCourseToDetailMateri( model, getCourse_id());
             Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
 
         });
