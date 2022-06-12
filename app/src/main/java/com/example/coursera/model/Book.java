@@ -7,9 +7,10 @@ public class Book {
 
     public Book(){}
 
-    public Book(String title, String description) {
+    public Book(String title, String description, String image_url) {
         this.title = title;
         this.description = description;
+        this.image_url = image_url;
     }
 
     public String getTitle() {
