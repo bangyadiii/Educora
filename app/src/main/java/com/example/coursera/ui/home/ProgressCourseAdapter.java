@@ -109,7 +109,6 @@ public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, Prog
                         .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot){
-                                Toast.makeText(context,"Picture Retrieved",Toast.LENGTH_SHORT).show();
                                 Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
 
                                 Glide.with(context).load(bitmap)

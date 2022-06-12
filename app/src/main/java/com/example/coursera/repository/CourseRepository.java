@@ -20,7 +20,6 @@ public class CourseRepository {
     public String BASE_COLLECTION = "Course";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference courseRef = db.collection(BASE_COLLECTION);
-    private CollectionReference courseRef1 = db.collection("Materi");
     private Application app;
 
     public CourseRepository(Application app) {

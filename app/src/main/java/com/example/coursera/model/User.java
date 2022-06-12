@@ -3,8 +3,11 @@ package com.example.coursera.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class User implements Parcelable {
-    private  String uid;
+    @DocumentId
+    private String uid;
     private String email;
     private String name;
     private String username;

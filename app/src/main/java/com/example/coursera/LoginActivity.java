@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.createAccount.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
+            finish();
         });
         binding.tblLogin.setOnClickListener(v-> {
             String email = binding.emailEdit.getText().toString();
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         if(!validateForm()) {
             return;
         }
-        LoadingDialog loadingDialog = new LoadingDialog(LoginActivity.this);
+        LoadingDialog loadingDialog = LoadingDialog.getInstance(LoginActivity.this);
         loadingDialog.startLoadingDialog();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -91,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
     public void updateUI(FirebaseUser user) {
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            Bundle data = new Bundle();
+//            data.putParcelable(user);
             startActivity(intent);
         } else {
             Toast.makeText(LoginActivity.this, "Log In First", Toast.LENGTH_SHORT).show();

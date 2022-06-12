@@ -54,7 +54,12 @@
         tools:layout="@layout/fragment_book" >
         <action
             android:id="@+id/action_navigation_book_to_bookDetailFragment"
-            app:destination="@id/bookDetailFragment" />
+            app:destination="@id/bookDetailFragment"
+            app:popUpTo="@id/navigation_book"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="book"
+            app:argType="com.example.coursera.model.Book" />
     </fragment>
 
 

@@ -1,6 +1,5 @@
 package com.example.coursera.ui.account;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
@@ -24,25 +22,16 @@ import com.example.coursera.databinding.FragmentAccountBinding;
 import com.example.coursera.model.Book;
 import com.example.coursera.model.Course;
 import com.example.coursera.model.User;
-import com.example.coursera.ui.book.BookAdapterGrid;
 import com.example.coursera.ui.book.BookViewModel;
+import com.example.coursera.ui.helper.LoadingDialog;
 import com.example.coursera.ui.helper.VerticalSpaceItemDecoration;
 import com.example.coursera.ui.home.HomeViewModel;
-import com.example.coursera.ui.home.MateriAdapter;
-import com.example.coursera.ui.account.AccountProgressCourseAdapter;
-import com.example.coursera.ui.home.ProgressCourseAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
 
 
 public class AccountFragment extends Fragment {
@@ -69,25 +58,40 @@ public class AccountFragment extends Fragment {
         setProgressCourseAdapter();
 
         mAuth  = FirebaseAuth.getInstance();
-        FirebaseUser fuser = mAuth.getCurrentUser();
-        FirebaseFirestore datau = FirebaseFirestore.getInstance();
-        datau.collection("users").whereEqualTo("uid",fuser.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-               if (!queryDocumentSnapshots.isEmpty()){
-                   for (DocumentSnapshot snapshot:queryDocumentSnapshots){
-                       user = snapshot.toObject(User.class);
-                   }
-               }
-            }
-        });
+        if(mAuth.getCurrentUser() != null) {
+//            if (!queryDocumentSnapshots.isEmpty()) {
+//                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+//                    user = snapshot.toObject(User.class);
+//                    binding.accNama.setText(user.getName() != null ? user.getName() : "Default");
+//                }
+//            }
+            FirebaseUser fUser = mAuth.getCurrentUser();
+            FirebaseFirestore datau = FirebaseFirestore.getInstance();
+            datau.collection("users").document(fUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+
+                        user = documentSnapshot.toObject(User.class);
+                        binding.accNama.setText(user.getName() != null ? user.getName() : "Default");
+                    }
+
+                }
+            });
+        }
         //Intent intent = getActivity().getIntent();
         //user  = intent.getParcelableExtra("user");
 
 
         binding.changeProfile.setOnClickListener(view -> {
-            NavDirections action = (NavDirections) AccountFragmentDirections.actionNavigationAccountToNavigationEditProfile(user);
-            Navigation.findNavController(getActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+            LoadingDialog loadingDialog = LoadingDialog.getInstance(requireActivity());
+            loadingDialog.startLoadingDialog();
+            if(user != null) {
+                NavDirections action = (NavDirections) AccountFragmentDirections.actionNavigationAccountToNavigationEditProfile(user);
+                Navigation.findNavController(getActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+            }
+            loadingDialog.dissmisDialog();
+
         });
 
         binding.logout.setOnClickListener(view -> {

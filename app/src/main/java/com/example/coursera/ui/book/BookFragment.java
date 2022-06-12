@@ -10,17 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coursera.databinding.FragmentBookBinding;
 import com.example.coursera.model.Book;
+import com.example.coursera.ui.helper.HorizontalSpaceItemDecoration;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
 public class BookFragment extends Fragment {
 
     private FragmentBookBinding binding;
-    BookAdapter mainAdapter;
+    private RecomendedBookAdapter recomendedBookAdapter;
+    private TrendingBookAdapter trendingBookAdapter;
     BookViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,48 +33,6 @@ public class BookFragment extends Fragment {
 
         binding = FragmentBookBinding.inflate(inflater, container, false);
 
-        //      code recyclerview dari MainActivity-------------------------------------
-//        firebaseFirestore = FirebaseFirestore.getInstance();
-
-//        //Query
-//        Query query = firebaseFirestore.collection("Book");
-//
-//        //RecyclerOption
-//        FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>().setQuery(query, Book.class).build();
-//
-//        FirestoreRecyclerAdapter adapter = new FirestoreRecyclerAdapter<Book, BooksViewHolder>(options) {
-//            @NonNull
-//            @Override
-//            public BooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onBindViewHolder(@NonNull BooksViewHolder holder, int position, @NonNull Book model) {
-//
-//            }
-//        }
-
-//        Integer[] langLogo = {R.drawable.book6,R.drawable.book2, R.drawable.book6};
-//
-//        String[] langName = {"Buku Fiksi", "Buku Non Fiksi", "Majalah"};
-//
-//        mainModels = new ArrayList<>();
-//        for (int i=0; i<langLogo.length; i++){
-//            Book model = new Book(langLogo[i], langName[i]);
-//            mainModels.add(model);
-//        }
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(
-//                container.getContext(),LinearLayoutManager.HORIZONTAL,false
-//        );
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//
-//        mainAdapter = new BookAdapter(getContext(), mainModels);
-//
-//        recyclerView.setAdapter(mainAdapter);
-
         return binding.getRoot();
 
     }
@@ -78,7 +40,8 @@ public class BookFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setBooksAdapter();
+        setRecomendedBookAdapter();
+        setTrendingBookAdapter();
     }
 
     @Override
@@ -87,39 +50,50 @@ public class BookFragment extends Fragment {
         binding = null;
     }
 
-//    private class BooksViewHolder extends RecyclerView.ViewHolder{
-//        public BooksViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//        }
-//    }
 
     @Override
     public void onStart() {
         super.onStart();
-        mainAdapter.startListening();
+        recomendedBookAdapter.startListening();
+        trendingBookAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mainAdapter.stopListening();
+        recomendedBookAdapter.stopListening();
+        trendingBookAdapter.stopListening();
     }
 
-    public void setBooksAdapter() {
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false
-        );
-        binding.recyclerView.setLayoutManager(layoutManager);
-        binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerView.hasFixedSize();
+    public void setTrendingBookAdapter(){
+        GridLayoutManager layoutManager = new GridLayoutManager(requireActivity(), 3, RecyclerView.VERTICAL, false);
+        binding.rvTrendingBook.setLayoutManager(layoutManager);
+        binding.rvTrendingBook.setItemAnimator(new DefaultItemAnimator());
+        binding.rvTrendingBook.hasFixedSize();
         FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>()
                 .setQuery(dashboardViewModel.getAllBook(), Book.class)
                 .build();
 
-        mainAdapter = new BookAdapter(options);
+        trendingBookAdapter = new TrendingBookAdapter(options);
+        binding.rvTrendingBook.setAdapter(trendingBookAdapter);
+    }
 
-        binding.recyclerView.setAdapter(mainAdapter);
+    public void setRecomendedBookAdapter() {
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                requireActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false
+        );
+        binding.recyclerView.setLayoutManager(layoutManager);
+        binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
+        binding.recyclerView.hasFixedSize();
+        binding.recyclerView.addItemDecoration(new HorizontalSpaceItemDecoration(20));
+        FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>()
+                .setQuery(dashboardViewModel.getAllBook(), Book.class)
+                .build();
+
+        recomendedBookAdapter = new RecomendedBookAdapter(options);
+
+        binding.recyclerView.setAdapter(recomendedBookAdapter);
 
     }
 }

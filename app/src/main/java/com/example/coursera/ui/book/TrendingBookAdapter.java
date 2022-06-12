@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +27,11 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class BookAdapterGrid extends FirestoreRecyclerAdapter<Book, BookAdapterGrid.ViewHolder> {
+public class TrendingBookAdapter extends FirestoreRecyclerAdapter<Book, TrendingBookAdapter.ViewHolder> {
     AppCompatActivity context;
 
 
-    public BookAdapterGrid(@NonNull FirestoreRecyclerOptions<Book> options_grid){
+    public TrendingBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options_grid){
         super(options_grid);
     }
 
@@ -50,23 +51,23 @@ public class BookAdapterGrid extends FirestoreRecyclerAdapter<Book, BookAdapterG
         if(context == null){
             return;
         }
-        holder.getRowItemBinding().textView3.setText(model.getTitle());
-//        holder.getRowItemBinding().textView4.setText(model.getDescription());
+        holder.getBinding().textView3.setText(model.getTitle());
 
 
         StorageReference mStorageReference= FirebaseStorage.getInstance().getReference().child(model.getImage_url());
         try{
-//            String image_url;
             final File localFile = File.createTempFile("book","png");
             mStorageReference.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot){
-                Toast.makeText(context,"Picture Retrieved",Toast.LENGTH_SHORT).show();
+
                 Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
 //                ((ImageView) context.findViewById(R.id.image_view)).setImageBitmap(bitmap);
-                Glide.with(context).load(bitmap)
-                .into(holder.getRowItemBinding().imageView);
+                Glide.with(context)
+                        .load(bitmap)
+                        .centerCrop()
+                        .into(holder.getBinding().bookTumbSmall);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -77,23 +78,24 @@ public class BookAdapterGrid extends FirestoreRecyclerAdapter<Book, BookAdapterG
         }catch (IOException e) {
             e.printStackTrace();
         }
-        holder.rowItemBinding.bookItemSmall.setOnClickListener(view -> {
-            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(R.id.action_navigation_book_to_bookDetailFragment);
+        holder.getBinding().bookItemSmall.setOnClickListener(view -> {
+            NavDirections action =  BookFragmentDirections.actionNavigationBookToBookDetailFragment(model);
+            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
 
         });
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        RowItemGridBinding rowItemBinding;
+        RowItemGridBinding binding;
 
         public ViewHolder(@NonNull RowItemGridBinding itemView) {
             super(itemView.getRoot());
-            this.rowItemBinding = itemView;
+            this.binding = itemView;
         }
 
-        public RowItemGridBinding getRowItemBinding() {
-            return rowItemBinding;
+        public RowItemGridBinding getBinding() {
+            return binding;
         }
     }
 }

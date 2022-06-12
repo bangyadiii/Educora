@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
 
-    <LinearLayout
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_book_item_large"
+    android:layout_width="185dp"
+    android:layout_height="265dp"
+    android:layout_marginVertical="20dp"
+    android:background="#000000"
+    android:backgroundTint="#000000"
+    android:elevation="8dp"
+    android:maxWidth="185dp"
+    android:maxHeight="265dp"
+    app:cardBackgroundColor="#000000"
+    app:cardCornerRadius="20dp">
+
+    <RelativeLayout
         android:id="@+id/item_book"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingStart="10dp">
+        android:layout_height="wrap_content">
+
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="185dp"
-            android:layout_height="265dp"
-            android:src="@drawable/book2" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minWidth="185dp"
+            android:minHeight="265dp"
+            android:src="@drawable/book1_" />
 
         <TextView
             android:id="@+id/text_view1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Futurama"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/text_view2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Futurama"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_alignStart="@id/image_view"
+            android:layout_alignEnd="@id/image_view"
+            android:layout_alignBottom="@id/image_view"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_title_book"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="30dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

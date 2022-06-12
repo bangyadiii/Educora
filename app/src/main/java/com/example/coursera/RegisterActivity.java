@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.coursera.model.User;
+import com.example.coursera.ui.helper.LoadingDialog;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -63,29 +67,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String email = edtEmail.getText().toString();
         String password = edtPass.getText().toString();
-
+        LoadingDialog loadingDialog = LoadingDialog.getInstance(RegisterActivity.this);
+        loadingDialog.startLoadingDialog();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
-                        //hideProgressDialog();
 
+                        loadingDialog.dissmisDialog();
                         if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
+                            onAuthSuccess(Objects.requireNonNull(task.getResult().getUser()));
                         } else {
                             Toast.makeText(RegisterActivity.this, "Sign Up Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
+                }).addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        loadingDialog.dissmisDialog();
+                    }
                 });
     }
 
     //fungsi dipanggil ketika proses Authentikasi berhasil
-    private void onAuthSuccess(FirebaseUser user) {
+    private void onAuthSuccess(@NonNull FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
-
-
         // membuat User admin baru
         String nama = edtNama.getText().toString();
         String noTelp = edtTelp.getText().toString();
@@ -96,8 +104,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Bundle bundle = new Bundle();
         bundle.putParcelable("user",user1);
         startActivity(intent);
-//        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-//        finish();
+        finish();
+
     }
 
     /*
@@ -136,7 +144,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private User writeNewUser(String uid, String email, String name, String username, String noHP) {
         User user = new User(uid,email,name,username,noHP);
 
-        mDatabase.collection("users").add(user);
+        mDatabase.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("register", "berhasil create user di firestore");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+
+            }
+        });
+
         //mDatabase.child("users").child(userId).setValue(user);
         return user;
     }

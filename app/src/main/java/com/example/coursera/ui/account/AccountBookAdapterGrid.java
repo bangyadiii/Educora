@@ -67,7 +67,7 @@ public class AccountBookAdapterGrid extends FirestoreRecyclerAdapter<Book, Accou
                 Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
 //                ((ImageView) context.findViewById(R.id.image_view)).setImageBitmap(bitmap);
                 Glide.with(context).load(bitmap)
-                .into(holder.getRowItemBinding().imageView);
+                .into(holder.getRowItemBinding().bookTumbSmall);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

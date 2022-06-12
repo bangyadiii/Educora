@@ -7,16 +7,25 @@ import android.view.LayoutInflater;
 import com.example.coursera.R;
 
 public class LoadingDialog {
-    Activity activity;
-    AlertDialog alertDialog;
+    static Activity activity1;
+    private AlertDialog alertDialog;
+    private static LoadingDialog newInstance;
 
-    public LoadingDialog(Activity activity){
-        this.activity = activity;
+    private LoadingDialog(){}
+    public static LoadingDialog getInstance(Activity activity){
+        activity1 = activity;
+        if(newInstance == null){
+            newInstance = new LoadingDialog();
+        }
+        return newInstance;
+
+
+
     }
     public void startLoadingDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity1);
 
-        LayoutInflater inflater = activity.getLayoutInflater();
+        LayoutInflater inflater = activity1.getLayoutInflater();
 
         builder.setView(inflater.inflate(R.layout.loading_progess, null));
         builder.setCancelable(false);

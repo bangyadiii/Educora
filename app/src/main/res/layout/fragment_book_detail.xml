@@ -5,15 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/book1"
-        android:layout_width="214dp"
-        android:layout_height="322dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/book_1"
+        android:layout_width="185dp"
+        android:layout_height="265dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginTop="50dp"
+        android:background="#000000"
+        android:backgroundTint="#000000"
+        android:elevation="8dp"
+        android:maxWidth="185dp"
+        android:maxHeight="265dp"
+        app:cardBackgroundColor="#000000"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/item_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minWidth="185dp"
+                android:minHeight="265dp"
+                android:src="@drawable/book1_" />
+
+            <TextView
+                android:id="@+id/text_view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/image_view"
+                android:layout_alignEnd="@id/image_view"
+                android:layout_alignBottom="@id/image_view"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/bg_title_book"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="30dp"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <LinearLayout
         android:id="@+id/ll"
@@ -32,7 +73,7 @@
             android:gravity="center"
             android:text="David Wolf"
             android:textColor="@color/black"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt2"
@@ -41,7 +82,7 @@
             android:gravity="center"
             android:text="Cold Lake"
             android:textColor="@color/black"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt3"
@@ -51,85 +92,34 @@
             android:gravity="center"
             android:text="Jeff Carson"
             android:textColor="@color/grey_primary"
-            android:textSize="13sp"></TextView>
+            android:textSize="13sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn1"
-        android:layout_width="153dp"
+        android:layout_width="200dp"
         android:layout_height="52dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_tombol_biru"
-        android:text="Buy Ebook"
+        android:text="Read Book"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn2"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@id/ll"
-        app:layout_editor_absoluteX="50dp"></Button>
-
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="153dp"
-        android:layout_height="52dp"
-        android:background="@drawable/bg_tombol_bluewhite"
-        android:text="Buy Audio"
-        android:textColor="@color/blue_primary"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn1"
-        app:layout_constraintTop_toTopOf="@+id/btn1"
-        app:layout_editor_absoluteX="221dp"></Button>
+        app:layout_editor_absoluteX="50dp" />
 
     <TextView
         android:id="@+id/txt4"
         android:layout_width="77dp"
         android:layout_height="23dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Best Seller"
         android:textColor="#444444"
         android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@+id/book2"
-        app:layout_constraintTop_toBottomOf="@id/btn2"
-        app:layout_editor_absoluteX="30dp"></TextView>
-
-    <ImageView
-        android:id="@+id/book2"
-        android:layout_width="75dp"
-        android:layout_height="134dp"
-        android:src="@drawable/book_7"
-        app:layout_constraintBottom_toBottomOf="@+id/book3"
-        app:layout_constraintEnd_toStartOf="@+id/book3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/book3"
-        app:layout_editor_absoluteX="30dp"></ImageView>
-
-    <ImageView
-        android:id="@+id/book3"
-        android:layout_width="75dp"
-        android:layout_height="134dp"
-        android:src="@drawable/book_3"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/book2"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"></ImageView>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="75dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/book_6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/book3"
-        app:layout_constraintTop_toBottomOf="@+id/txt4"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/btn1"
+        app:layout_editor_absoluteX="30dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -144,5 +134,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="30dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/txt4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
