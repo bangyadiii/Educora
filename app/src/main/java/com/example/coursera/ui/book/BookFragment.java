@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.coursera.databinding.FragmentBookBinding;
@@ -22,7 +21,6 @@ public class BookFragment extends Fragment {
 
     private FragmentBookBinding binding;
     BookAdapter mainAdapter;
-    BookAdapterGrid bookAdapterGrid;
     BookViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,10 +80,7 @@ public class BookFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setBooksAdapter();
-        setBooksGridAdapter();
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -103,14 +98,12 @@ public class BookFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mainAdapter.startListening();
-        bookAdapterGrid.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mainAdapter.stopListening();
-        bookAdapterGrid.stopListening();
     }
 
     public void setBooksAdapter() {
@@ -128,20 +121,6 @@ public class BookFragment extends Fragment {
         mainAdapter = new BookAdapter(options);
 
         binding.recyclerView.setAdapter(mainAdapter);
-
-    }
-
-    private void setBooksGridAdapter() {
-        androidx.recyclerview.widget.GridLayoutManager gridLayoutManager = new androidx.recyclerview.widget.GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL,false);
-        binding.recyclerView2.setLayoutManager(gridLayoutManager);
-        binding.recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerView2.hasFixedSize();
-        FirestoreRecyclerOptions<Book> options_grid = new FirestoreRecyclerOptions.Builder<Book>()
-                .setQuery(dashboardViewModel.getAllBook(), Book.class).build();
-
-        bookAdapterGrid = new BookAdapterGrid(options_grid);
-
-        binding.recyclerView2.setAdapter(bookAdapterGrid);
 
     }
 }
