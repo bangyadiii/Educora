@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.MyBusiness.MyApp.databinding.RowItemGridBinding;
 import com.bumptech.glide.Glide;
 import com.example.coursera.R;
 import com.example.coursera.databinding.RowItemGridBinding;

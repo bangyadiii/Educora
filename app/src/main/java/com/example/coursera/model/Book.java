@@ -9,8 +9,10 @@ public class Book implements Parcelable {
     @DocumentId
     String id;
     String title;
-    String image_url;
     String description;
+    String image_url;
+
+   
 
     protected Book(Parcel in) {
         id = in.readString();
@@ -38,6 +40,7 @@ public class Book implements Parcelable {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
+
 
     public Book(){}
 
@@ -72,6 +75,14 @@ public class Book implements Parcelable {
         this.description = description;
     }
 
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+
     @Override
     public int describeContents() {
         return 0;
@@ -83,5 +94,6 @@ public class Book implements Parcelable {
         parcel.writeString(title);
         parcel.writeString(image_url);
         parcel.writeString(description);
+
     }
 }
