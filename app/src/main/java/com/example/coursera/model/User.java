@@ -1,6 +1,9 @@
 package com.example.coursera.model;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
     private  String uid;
     private String email;
     private String name;
@@ -18,6 +21,26 @@ public class User {
         this.username = username;
         this.noHP = noHP;
     }
+
+    protected User(Parcel in) {
+        uid = in.readString();
+        email = in.readString();
+        name = in.readString();
+        username = in.readString();
+        noHP = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -56,5 +79,20 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(getUid());
+        parcel.writeString(getEmail());
+        parcel.writeString(getName());
+        parcel.writeString(getUsername());
+        parcel.writeString(getNoHP());
+
     }
 }

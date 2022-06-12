@@ -28,7 +28,6 @@ public class BookFragment extends Fragment {
                 new ViewModelProvider(this).get(BookViewModel.class);
 
         binding = FragmentBookBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         //      code recyclerview dari MainActivity-------------------------------------
 //        firebaseFirestore = FirebaseFirestore.getInstance();
@@ -72,7 +71,7 @@ public class BookFragment extends Fragment {
 //
 //        recyclerView.setAdapter(mainAdapter);
 
-        return root;
+        return binding.getRoot();
 
     }
 

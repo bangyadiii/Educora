@@ -11,4 +11,11 @@
     <string name="change_profile"><u>Change Profile</u></string>
     <string name="judul_buku">Judul Buku</string>
     <string name="isi_buku">Isi Buku</string>
+    <string name="api_key">AIzaSyB4MRf3eAwtb7tAbtongfNw4KxQLcruw_0</string>
+    <string name="track_selection_title">Video Quality</string>
+    <string name="exo_track_selection_title_video">Ini Title</string>
+    <string name="exo_track_selection_title_audio">ini audio</string>
+    <string name="exo_track_selection_title_text">ini text</string>
+    <string name="edit_account_fragment">edit account fragment</string>
+    <string name="course_details"><b>Course</b> Details</string>
 </resources>
