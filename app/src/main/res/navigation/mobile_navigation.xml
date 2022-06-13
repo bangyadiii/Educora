@@ -97,6 +97,9 @@
         <argument
             android:name="user"
             app:argType="com.example.coursera.model.User" />
+        <action
+            android:id="@+id/action_navigation_edit_profile_to_navigation_account"
+            app:destination="@id/navigation_account" />
     </fragment>
     <fragment
         android:id="@+id/bookDetailFragment"

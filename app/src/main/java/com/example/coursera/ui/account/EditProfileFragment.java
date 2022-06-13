@@ -19,11 +19,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -34,6 +37,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.coursera.BuildConfig;
 import com.example.coursera.R;
 import com.example.coursera.databinding.FragmentEditProfileBinding;
 import com.example.coursera.model.User;
@@ -55,19 +59,23 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class EditProfileFragment extends Fragment {
     FragmentEditProfileBinding binding;
     private User user;
-    public static int RC_TAKE_PHOTO = 10;
-    public static int RC_FROM_GALERY = 20;
+    public final static int RC_TAKE_PHOTO = 10;
+    public final static int RC_FROM_GALERY = 20;
     private Activity app;
     private HomeViewModel homeViewModel;
-    private FirebaseStorage fbStorage;
-    private Uri uri;
-    private Bitmap mImageBitmap;
-    private String mCurrentPhotoPath;
+    private StorageReference mStorageRef;
+    private Uri contentUri;
+
+    String currentPhotoPath;
+    private ExecutorService execGetImage;
+    private Handler handler;
 
 
 
@@ -85,14 +93,15 @@ public class EditProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         app = requireActivity();
+
+        execGetImage = Executors.newSingleThreadExecutor();
+        handler = new Handler(Looper.getMainLooper());
         binding = FragmentEditProfileBinding.inflate(inflater);
         homeViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(HomeViewModel.class);
-        fbStorage = FirebaseStorage.getInstance();
-
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         if (getArguments() != null && getArguments().getParcelable("user") != null) {
@@ -110,51 +119,36 @@ public class EditProfileFragment extends Fragment {
         binding.emailEdit.setKeyListener(null);
         showAvatar();
         binding.avatar.setOnClickListener(view -> {
-//            selectImage();
-            showFileChooser();
+            checkPermissionsThenSelectDialog();
+
         });
         binding.btEditAvatar.setOnClickListener(view -> {
-//            selectImage();
-            showFileChooser();
+            checkPermissionsThenSelectDialog();
 
         });
-        if(uri != null){
-            Thread thread = new Thread(() -> {
-                try {
-                    InputStream inputStream = app.getContentResolver().openInputStream(uri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    binding.avatar.post(() -> {
-                        binding.avatar.setImageBitmap(bitmap);
-                    });
 
-                } catch (IOException e ){
-                    e.printStackTrace();
-                }
-            });
-            thread.start();
-
-        }
         binding.tblSimpan.setOnClickListener(view -> {
             LoadingDialog loadingDialog = LoadingDialog.getInstance(requireActivity());
             loadingDialog.startLoadingDialog();
             user.setName(binding.namaEdit.getText().toString());
             user.setUsername(binding.usernameEdit.getText().toString());
             user.setNoHP(binding.telpEdit.getText().toString());
-            if(uri != null) {
+            if(contentUri != null) {
                 try {
-                    upload(uri);
+                    uploadToStorage(contentUri);
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
-                    Toast.makeText(app, "error " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(app, "error URI = null" + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             homeViewModel.editUser(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     loadingDialog.dissmisDialog();
                     if(task.isSuccessful()){
                         Toast.makeText(app, "berhasil update profile", Toast.LENGTH_SHORT).show();
-                        Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).popBackStack();
+                        Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).popBackStack(R.id.action_navigation_edit_profile_to_navigation_account, true);
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -164,27 +158,45 @@ public class EditProfileFragment extends Fragment {
                     
                 }
             });
+
             
         });
 
         return binding.getRoot();
     }
-    private void showFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("*/*");
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        try {
-            Log.d("OPEN", "filechooser");
-            startActivityForResult(
-                    intent,
-                    RC_FROM_GALERY);
-        } catch (android.content.ActivityNotFoundException ex) {
-            // Potentially direct the user to the Market with a Dialog
-            Toast.makeText(requireActivity(), "Please install a File Manager.",
-                    Toast.LENGTH_SHORT).show();
-        }
+    private void checkPermissionsThenSelectDialog(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (app.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || app.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requireActivity().requestPermissions(permissions, 100);
+            }else
+                selectImage();
+
+
+        }else
+            selectImage();
     }
+
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); //getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
 
     private void selectImage() {
         final CharSequence [] items = {"Kamera", "Galeri", "Cancel"};
@@ -193,17 +205,23 @@ public class EditProfileFragment extends Fragment {
         builder.setItems(items, ((dialogInterface, i) -> {
             if(items[i].equals("Kamera")) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (requireActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || app.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requireActivity().requestPermissions(permissions, 100);
-                    } else {
-
+                if (cameraIntent.resolveActivity(app.getPackageManager()) != null) {
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        Toast.makeText(app, "error occur while create image file", Toast.LENGTH_SHORT).show();
+                        
                     }
-                } else {
-
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(app, "com.example.coursera", photoFile);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                        startActivityForResult(cameraIntent, RC_TAKE_PHOTO);
+                    }
                 }
+
+                startActivityForResult( cameraIntent, RC_FROM_GALERY);
 
 
             }else if(items[i].equals("Galeri")){
@@ -225,21 +243,87 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            // Get the Uri of the selected file
-            uri = data.getData();
+       if(resultCode != RESULT_CANCELED){
+           switch (requestCode) {
+               case RC_TAKE_PHOTO:
+                   if (resultCode == RESULT_OK && currentPhotoPath != null) {
 
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+                       Glide.with(this).load(new File(currentPhotoPath)).centerCrop().into(binding.avatar);
+
+                       ////scaning masuk ke gallery android (opsional)//////////////////
+                       Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                       File f = new File(currentPhotoPath);
+                       contentUri = Uri.fromFile(f);
+                       mediaScanIntent.setData(contentUri);
+                       app.sendBroadcast(mediaScanIntent);
+                       //////////////////////////////////
+
+
+                   }
+                   break;
+
+               case RC_FROM_GALERY:
+                   if (resultCode == RESULT_OK && data != null) {
+
+                       contentUri = data.getData();
+                       String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                       if (contentUri != null) {
+                           Cursor cursor = app.getContentResolver().query(contentUri,filePathColumn, null, null, null);
+                           execGetImage.execute(new Runnable() {
+                               @Override
+                               public void run() {
+                                   if (cursor != null) {
+                                       cursor.moveToFirst();
+
+                                       int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                       String picturePath = cursor.getString(columnIndex);
+                                       handler.post(() -> {
+                                           Glide.with(app).load(new File(picturePath)).centerCrop().into(binding.avatar);
+                                       });
+
+                                       cursor.close();
+                                   }
+
+                               }
+                           });
+                           if (cursor != null) {
+                               cursor.moveToFirst();
+
+                               int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                               String picturePath = cursor.getString(columnIndex);
+
+                               Glide.with(this).load(new File(picturePath)).centerCrop().into(binding.avatar);
+                               cursor.close();
+                           }
+
+                       }
+
+                   }
+                   break;
+           }
+
+       }
+
 
     }
 
-    public void upload(@NonNull Uri uri) throws URISyntaxException {
-        String fileName = getFileName(requireActivity(), uri);
-        user.setAvatar("avatars/" + fileName);
-        StorageReference fileRef = fbStorage.getReference().child("avatars/" + fileName );
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            selectImage();
 
-        UploadTask uploadTask = fileRef.putFile(uri);
+        } else {
+            Toast.makeText(app, "denied", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void uploadToStorage(@NonNull Uri file) throws URISyntaxException {
+        String avatar_url = "avatars/" + user.getUid() + ".jpg";
+        user.setAvatar(avatar_url);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference fotoRef = mStorageRef.child(avatar_url);
+        UploadTask uploadTask = fotoRef.putFile(file);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -249,9 +333,11 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.d("UPLOAD", "sukses");
+                Toast.makeText(app, "berhasil upload avatars", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     public static String getFileName(Context context, Uri uri) throws URISyntaxException {
         Log.d("PATH", uri.getScheme());
@@ -267,8 +353,11 @@ public class EditProfileFragment extends Fragment {
         }
         return null;
     }
+
+
+
     private void showAvatar(){
-        if(user != null) {
+        if(user != null && user.getAvatar() != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(user.getAvatar());
             try {
                 final File localFile = File.createTempFile("book", "png");

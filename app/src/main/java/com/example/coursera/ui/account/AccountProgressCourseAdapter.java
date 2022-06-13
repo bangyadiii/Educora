@@ -55,17 +55,16 @@ public class AccountProgressCourseAdapter extends FirestoreRecyclerAdapter<Cours
     @Override
     public CourseItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ProgressClassItemBinding binding = ProgressClassItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-         context = (AppCompatActivity) parent.getContext();
+        context = (AppCompatActivity) parent.getContext();
 
-         binding.cvProgressItem.setOnClickListener(view -> {
+        binding.cvProgressItem.setOnClickListener(view -> {
 //            NavOptions navOptions = new NavOptions.Builder()
 //                    .setPopUpTo(R.id.detail_course, true)
 //                    .build();
 //
 //                 Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main))
 //                         .navigate(R.id.action_navigation_home_to_detail_course);
-
-             });
+        });
 
         return new CourseItemHolder(binding, parent.getContext());
 
@@ -105,7 +104,6 @@ public class AccountProgressCourseAdapter extends FirestoreRecyclerAdapter<Cours
             binding.tvDescription.setText(course.getDescription());
             StorageReference mStorageReference= FirebaseStorage.getInstance().getReference().child(course.getIcon_url());
             try{
-//            String image_url;
                 final File localFile = File.createTempFile("course_icon","png");
                 mStorageReference.getFile(localFile)
                         .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){

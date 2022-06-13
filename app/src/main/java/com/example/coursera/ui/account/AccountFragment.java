@@ -1,5 +1,6 @@
 package com.example.coursera.ui.account;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -56,6 +57,7 @@ public class AccountFragment extends Fragment {
     AccountSmallBookAdapter bookAdapterGrid;
     FirebaseAuth mAuth;
     User user;
+    Activity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class AccountFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(HomeViewModel.class);
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         dashboardViewModel = new ViewModelProvider(this).get(BookViewModel.class);
+        activity=  requireActivity();
 
 
         mAuth  = FirebaseAuth.getInstance();
@@ -116,8 +119,7 @@ public class AccountFragment extends Fragment {
         setTrendingBookAdapter();
 
 //        setBooksGridAdapter();
-        View root = binding.getRoot();
-        return root;
+        return  binding.getRoot();
     }
     @Override
     public void onStart() {
@@ -136,7 +138,7 @@ public class AccountFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+//        binding = null;
     }
 
     public void setProgressCourseAdapter(){
@@ -170,7 +172,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void showAvatar(){
-        if(user != null) {
+        if(user != null && user.getAvatar() != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(user.getAvatar());
             try {
                 final File localFile = File.createTempFile("book", "png");
@@ -181,11 +183,11 @@ public class AccountFragment extends Fragment {
 
                                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
 //                ((ImageView) context.findViewById(R.id.image_view)).setImageBitmap(bitmap);
-                                Glide.with(requireActivity())
+                                Glide.with(activity)
                                         .load(bitmap)
                                         .centerCrop()
                                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                                        .into(binding.avatar);
+                                        .into(binding.avatar1);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

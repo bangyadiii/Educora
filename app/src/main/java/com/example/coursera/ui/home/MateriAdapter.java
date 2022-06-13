@@ -23,12 +23,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class MateriAdapter extends FirestoreRecyclerAdapter<Materi, MateriAdapter.MateriItemHolder> {
 
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+
     AppCompatActivity context;
     public MateriAdapter(@NonNull FirestoreRecyclerOptions<Materi> options) {
         super(options);
@@ -47,16 +42,20 @@ public class MateriAdapter extends FirestoreRecyclerAdapter<Materi, MateriAdapte
         model.setCourse_id(course_id);
         holder.getBinding().tvTitle.setText(model.getTitle());
         holder.getBinding().tvDescriptionForMateri.setText(model.getDescription());
+
         holder.getBinding().cvMateri.setOnClickListener(view -> {
-//            Log.d("gg",model.getId());
-            Log.d("gg",model.getTitle());
-            Log.d("gg","course id: " + model.getCourse_id());
 
             NavDirections action = (NavDirections) MateriFragmentDirections.actionDetailCourseToDetailMateri( model, getCourse_id());
             Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
 
         });
 
+        holder.getBinding().imageButton.setOnClickListener(view -> {
+
+            NavDirections action = (NavDirections) MateriFragmentDirections.actionDetailCourseToDetailMateri( model, getCourse_id());
+            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+
+        });
     }
 
     @NonNull
