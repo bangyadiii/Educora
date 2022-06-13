@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 import com.example.coursera.databinding.RowItemGridBinding;
 import com.example.coursera.model.Book;
@@ -27,11 +28,11 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class TrendingBookAdapter extends FirestoreRecyclerAdapter<Book, TrendingBookAdapter.ViewHolder> {
+public class SmallBookAdapter extends FirestoreRecyclerAdapter<Book, SmallBookAdapter.ViewHolder> {
     AppCompatActivity context;
 
 
-    public TrendingBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options_grid){
+    public SmallBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options_grid){
         super(options_grid);
     }
 
@@ -67,6 +68,7 @@ public class TrendingBookAdapter extends FirestoreRecyclerAdapter<Book, Trending
                 Glide.with(context)
                         .load(bitmap)
                         .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                         .into(holder.getBinding().bookTumbSmall);
             }
         }).addOnFailureListener(new OnFailureListener() {

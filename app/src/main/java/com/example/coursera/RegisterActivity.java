@@ -142,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     // menulis ke Database
     private User writeNewUser(String uid, String email, String name, String username, String noHP) {
-        User user = new User(uid,email,name,username,noHP);
+        User user = new User(uid,email,name,username,noHP, null);
 
         mDatabase.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

@@ -23,8 +23,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public class BookFragment extends Fragment {
 
     private FragmentBookBinding binding;
-    private RecomendedBookAdapter recomendedBookAdapter;
-    private TrendingBookAdapter trendingBookAdapter;
+    private LargeBookAdapter largeBookAdapter;
+    private SmallBookAdapter trendingBookAdapter;
     BookViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,14 +54,14 @@ public class BookFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        recomendedBookAdapter.startListening();
+        largeBookAdapter.startListening();
         trendingBookAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        recomendedBookAdapter.stopListening();
+        largeBookAdapter.stopListening();
         trendingBookAdapter.stopListening();
     }
 
@@ -69,12 +69,12 @@ public class BookFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(requireActivity(), 3, RecyclerView.VERTICAL, false);
         binding.rvTrendingBook.setLayoutManager(layoutManager);
         binding.rvTrendingBook.setItemAnimator(new DefaultItemAnimator());
-        binding.rvTrendingBook.hasFixedSize();
+//        binding.rvTrendingBook.hasFixedSize();
         FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>()
                 .setQuery(dashboardViewModel.getAllBook(), Book.class)
                 .build();
 
-        trendingBookAdapter = new TrendingBookAdapter(options);
+        trendingBookAdapter = new SmallBookAdapter(options);
         binding.rvTrendingBook.setAdapter(trendingBookAdapter);
     }
 
@@ -85,15 +85,15 @@ public class BookFragment extends Fragment {
         );
         binding.recyclerView.setLayoutManager(layoutManager);
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerView.hasFixedSize();
+//        binding.recyclerView.hasFixedSize();
         binding.recyclerView.addItemDecoration(new HorizontalSpaceItemDecoration(20));
         FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>()
                 .setQuery(dashboardViewModel.getAllBook(), Book.class)
                 .build();
 
-        recomendedBookAdapter = new RecomendedBookAdapter(options);
+        largeBookAdapter = new LargeBookAdapter(options);
 
-        binding.recyclerView.setAdapter(recomendedBookAdapter);
+        binding.recyclerView.setAdapter(largeBookAdapter);
 
     }
 }

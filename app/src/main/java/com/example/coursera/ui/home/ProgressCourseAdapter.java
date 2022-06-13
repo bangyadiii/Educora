@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 import com.example.coursera.databinding.ProgressClassItemBinding;
 import com.example.coursera.model.Course;
@@ -111,7 +112,9 @@ public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, Prog
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot){
                                 Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
 
-                                Glide.with(context).load(bitmap)
+                                Glide.with(context)
+                                        .load(bitmap)
+                                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                                         .into(binding.ivCourseIcon);
                             }
                         }).addOnFailureListener(new OnFailureListener() {

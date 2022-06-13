@@ -1,5 +1,7 @@
 package com.example.coursera.ui.account;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 
 
@@ -23,15 +28,24 @@ import com.example.coursera.model.Book;
 import com.example.coursera.model.Course;
 import com.example.coursera.model.User;
 import com.example.coursera.ui.book.BookViewModel;
+import com.example.coursera.ui.book.SmallBookAdapter;
 import com.example.coursera.ui.helper.LoadingDialog;
 import com.example.coursera.ui.helper.VerticalSpaceItemDecoration;
 import com.example.coursera.ui.home.HomeViewModel;
+import com.example.coursera.ui.home.ProgressCourseAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class AccountFragment extends Fragment {
@@ -39,7 +53,7 @@ public class AccountFragment extends Fragment {
     HomeViewModel homeViewModel;
     private FragmentAccountBinding binding;
     BookViewModel dashboardViewModel;
-    AccountBookAdapterGrid bookAdapterGrid;
+    AccountSmallBookAdapter bookAdapterGrid;
     FirebaseAuth mAuth;
     User user;
 
@@ -55,7 +69,7 @@ public class AccountFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(HomeViewModel.class);
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         dashboardViewModel = new ViewModelProvider(this).get(BookViewModel.class);
-        setProgressCourseAdapter();
+
 
         mAuth  = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null) {
@@ -74,13 +88,12 @@ public class AccountFragment extends Fragment {
 
                         user = documentSnapshot.toObject(User.class);
                         binding.accNama.setText(user.getName() != null ? user.getName() : "Default");
+                        showAvatar();
                     }
 
                 }
             });
         }
-        //Intent intent = getActivity().getIntent();
-        //user  = intent.getParcelableExtra("user");
 
 
         binding.changeProfile.setOnClickListener(view -> {
@@ -99,9 +112,10 @@ public class AccountFragment extends Fragment {
             FirebaseAuth.getInstance().signOut();
             getActivity().finish();
         });
+        setProgressCourseAdapter();
+        setTrendingBookAdapter();
 
-        //akhir
-        setBooksGridAdapter();
+//        setBooksGridAdapter();
         View root = binding.getRoot();
         return root;
     }
@@ -124,10 +138,11 @@ public class AccountFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
     public void setProgressCourseAdapter(){
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(
-                getActivity().getApplicationContext(),LinearLayoutManager.VERTICAL,false
+                requireActivity().getApplicationContext(),LinearLayoutManager.VERTICAL,false
         );
         binding.rvCourse.setLayoutManager(layoutManager);
         binding.rvCourse.setItemAnimator(new DefaultItemAnimator());
@@ -140,17 +155,49 @@ public class AccountFragment extends Fragment {
         binding.rvCourse.setAdapter(progressCourseAdapter);
 
     }
-    private void setBooksGridAdapter() {
-        androidx.recyclerview.widget.GridLayoutManager gridLayoutManager = new androidx.recyclerview.widget.GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL,false);
-        binding.recyclerView2.setLayoutManager(gridLayoutManager);
+
+    public void setTrendingBookAdapter(){
+        GridLayoutManager layoutManager = new GridLayoutManager(requireActivity(), 3, RecyclerView.VERTICAL, false);
+        binding.recyclerView2.setLayoutManager(layoutManager);
         binding.recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerView2.hasFixedSize();
-        FirestoreRecyclerOptions<Book> options_grid = new FirestoreRecyclerOptions.Builder<Book>()
-                .setQuery(dashboardViewModel.getAllBook(), Book.class).build();
+//        binding.recyclerView2.hasFixedSize();
+        FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>()
+                .setQuery(dashboardViewModel.getAllBook(), Book.class)
+                .build();
 
-        bookAdapterGrid = new AccountBookAdapterGrid(options_grid);
-
+        bookAdapterGrid = new AccountSmallBookAdapter(options);
         binding.recyclerView2.setAdapter(bookAdapterGrid);
-
     }
+
+    private void showAvatar(){
+        if(user != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(user.getAvatar());
+            try {
+                final File localFile = File.createTempFile("book", "png");
+                mStorageReference.getFile(localFile)
+                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                ((ImageView) context.findViewById(R.id.image_view)).setImageBitmap(bitmap);
+                                Glide.with(requireActivity())
+                                        .load(bitmap)
+                                        .centerCrop()
+                                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                                        .into(binding.avatar);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(requireActivity(), "Error Occurred", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

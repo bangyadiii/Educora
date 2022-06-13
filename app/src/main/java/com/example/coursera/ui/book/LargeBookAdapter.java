@@ -1,13 +1,10 @@
 package com.example.coursera.ui.book;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 
 import com.example.coursera.databinding.RowItemBinding;
@@ -31,11 +29,11 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class RecomendedBookAdapter extends FirestoreRecyclerAdapter<Book, RecomendedBookAdapter.GridViewHolder> {
+public class LargeBookAdapter extends FirestoreRecyclerAdapter<Book, LargeBookAdapter.GridViewHolder> {
 //    ArrayList<Book> mainModels;
     Activity act;
 
-    public RecomendedBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options){
+    public LargeBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options){
         super(options);
     }
 
@@ -46,7 +44,7 @@ public class RecomendedBookAdapter extends FirestoreRecyclerAdapter<Book, Recome
         act = (Activity) parent.getContext();
 
         RowItemBinding rowItemBinding = RowItemBinding.inflate(LayoutInflater.from(act),parent,false);
-        return new RecomendedBookAdapter.GridViewHolder(rowItemBinding);
+        return new LargeBookAdapter.GridViewHolder(rowItemBinding);
     }
 
     @Override
@@ -64,6 +62,7 @@ public class RecomendedBookAdapter extends FirestoreRecyclerAdapter<Book, Recome
 
                             Glide.with(act).load(bitmap)
                                     .centerCrop()
+                                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                                     .into(holder.getRowItemGridBinding().imageView);
                         }
                     }).addOnFailureListener(new OnFailureListener() {

@@ -106,5 +106,20 @@
         <argument
             android:name="book"
             app:argType="com.example.coursera.model.Book" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_readBookFragment"
+            app:destination="@id/readBookFragment"
+            app:popUpTo="@id/navigation_book"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/readBookFragment"
+        android:name="com.example.coursera.ui.book.ReadBookFragment"
+        android:label="ReadBook"
+        tools:layout="@layout/fragment_read_book" >
+        <argument
+            android:name="book"
+            app:argType="com.example.coursera.model.Book" />
     </fragment>
 </navigation>

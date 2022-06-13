@@ -36,7 +36,7 @@ public class CourseRepository {
 
     public Query getMateriByCourse(String course_id){
 //        return courseRef1.whereEqualTo("course_id", course_id);
-        return courseRef.document(course_id).collection("Materi");
+        return courseRef.document(course_id).collection("Materi").orderBy("episode");
     }
 
 

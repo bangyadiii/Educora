@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.coursera.ui.account.EditProfileFragment">
+    tools:context="com.example.coursera.ui.account.EditProfileFragment"
+    android:layout_marginBottom="50dp">
 
     <LinearLayout
         android:id="@+id/lin_edit"
@@ -23,13 +24,15 @@
             android:layout_marginTop="30dp"
             android:layout_gravity="center">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/avatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/profile_photo_2"
+                app:riv_corner_radius="30dp"
+
 
                 />
 

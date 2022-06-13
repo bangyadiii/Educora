@@ -1,17 +1,27 @@
 package com.example.coursera.ui.book;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.coursera.R;
+
+
+import com.example.coursera.databinding.FragmentReadBookBinding;
+import com.example.coursera.ui.helper.LoadingDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 public class ReadBookFragment extends Fragment {
-   BottomNavigationView bottomNavigationView;
+    BottomNavigationView bottomNavigationView;
+    FragmentReadBookBinding binding;
 
     public ReadBookFragment() {
         // Required empty public constructor
@@ -24,12 +34,18 @@ public class ReadBookFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_read_book, container, false);
-        bottomNavigationView = view.findViewById(R.id.bottom_nav);
-        bottomNavigationView.setOnClickListener((View.OnClickListener) this);
-        return view;
+        try {
+            binding = FragmentReadBookBinding.inflate(inflater, container, false);
+//            bottomNavigationView = binding.bottomNav;
+//            bottomNavigationView.setOnClickListener((View.OnClickListener) this);
+        return binding.getRoot();
+
+        }catch (Exception e) {
+            Log.e("inflate", "onCreateView", e);
+        }
+        return binding.getRoot();
+
     }
 }
