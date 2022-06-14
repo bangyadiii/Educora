@@ -68,8 +68,7 @@ dependencies {
 
     //video player
     implementation 'com.google.android.exoplayer:exoplayer:2.14.1'
-    //pdf reader
-    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+
 
 
 
