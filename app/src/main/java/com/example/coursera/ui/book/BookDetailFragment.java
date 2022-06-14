@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 import com.example.coursera.databinding.FragmentBookDetailBinding;
 import com.example.coursera.model.Book;
+import com.example.coursera.ui.adapter.SmallBookAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

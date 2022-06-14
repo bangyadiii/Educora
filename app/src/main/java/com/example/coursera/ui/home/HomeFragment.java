@@ -1,26 +1,32 @@
 package com.example.coursera.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import com.example.coursera.R;
 import com.example.coursera.databinding.FragmentHomeBinding;
 import com.example.coursera.model.Course;
+import com.example.coursera.ui.adapter.CourseAdapter;
 import com.example.coursera.ui.helper.VerticalSpaceItemDecoration;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
 public class HomeFragment extends Fragment {
 
-    ProgressCourseAdapter progressCourseAdapter;
+    CourseAdapter courseAdapter;
 
     private FragmentHomeBinding binding;
     HomeViewModel homeViewModel;
@@ -36,13 +42,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        progressCourseAdapter.startListening();
+        courseAdapter.startListening();
 
     }
     @Override
     public void onStop() {
         super.onStop();
-        progressCourseAdapter.stopListening();
+        courseAdapter.stopListening();
     }
 
     @Override
@@ -66,8 +72,13 @@ public class HomeFragment extends Fragment {
         FirestoreRecyclerOptions<Course> options = new FirestoreRecyclerOptions.Builder<Course>()
                 .setQuery(homeViewModel.getAllCourses(), Course.class)
                 .build();
-        progressCourseAdapter = new ProgressCourseAdapter(options);
-        binding.progressClassRecyclerView.setAdapter(progressCourseAdapter);
+        courseAdapter = new CourseAdapter(options);
+        courseAdapter.setOnItemClickListener((view, position, model) -> {
+            Log.d("model", model.toString());
+            NavDirections action = (NavDirections) HomeFragmentDirections.actionNavigationHomeToDetailCourse(model.getId());
+            Navigation.findNavController(((AppCompatActivity) getActivity()).findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+        });
+        binding.progressClassRecyclerView.setAdapter(courseAdapter);
 
     }
 }

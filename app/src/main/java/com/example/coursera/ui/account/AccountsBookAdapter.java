@@ -17,7 +17,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 import com.example.coursera.databinding.RowItemGridBinding;
 import com.example.coursera.model.Book;
-import com.example.coursera.ui.book.BookFragmentDirections;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,11 +28,11 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class AccountSmallBookAdapter extends FirestoreRecyclerAdapter<Book, AccountSmallBookAdapter.ViewHolder> {
+public class AccountsBookAdapter extends FirestoreRecyclerAdapter<Book, AccountsBookAdapter.ViewHolder> {
     AppCompatActivity context;
 
 
-    public AccountSmallBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options_grid){
+    public AccountsBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options_grid){
         super(options_grid);
     }
 
@@ -64,10 +63,11 @@ public class AccountSmallBookAdapter extends FirestoreRecyclerAdapter<Book, Acco
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot){
 
-                Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
-//                ((ImageView) context.findViewById(R.id.image_view)).setImageBitmap(bitmap);
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+
                 Glide.with(context)
                         .load(bitmap)
+                        .override(600, 900)
                         .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                         .into(holder.getBinding().bookTumbSmall);

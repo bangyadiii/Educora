@@ -9,14 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coursera.R;
 import com.example.coursera.databinding.FragmentBookBinding;
 import com.example.coursera.model.Book;
-import com.example.coursera.ui.helper.HorizontalSpaceItemDecoration;
+import com.example.coursera.ui.adapter.LargeBookAdapter;
+import com.example.coursera.ui.adapter.SmallBookAdapter;
+import com.example.coursera.ui.helper.SpaceItemDecoration;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
@@ -75,6 +80,10 @@ public class BookFragment extends Fragment {
                 .build();
 
         trendingBookAdapter = new SmallBookAdapter(options);
+        trendingBookAdapter.setOnItemClickListener((view, position, model) -> {
+            NavDirections action =  BookFragmentDirections.actionNavigationBookToBookDetailFragment(model);
+            Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+        });
         binding.rvTrendingBook.setAdapter(trendingBookAdapter);
     }
 
@@ -86,12 +95,16 @@ public class BookFragment extends Fragment {
         binding.recyclerView.setLayoutManager(layoutManager);
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
 //        binding.recyclerView.hasFixedSize();
-        binding.recyclerView.addItemDecoration(new HorizontalSpaceItemDecoration(20));
+        binding.recyclerView.addItemDecoration(new SpaceItemDecoration(40, 10));
         FirestoreRecyclerOptions<Book> options = new FirestoreRecyclerOptions.Builder<Book>()
                 .setQuery(dashboardViewModel.getAllBook(), Book.class)
                 .build();
 
         largeBookAdapter = new LargeBookAdapter(options);
+        largeBookAdapter.setOnItemClickListener((view, position, model) -> {
+            NavDirections action =  BookFragmentDirections.actionNavigationBookToBookDetailFragment(model);
+            Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+        });
 
         binding.recyclerView.setAdapter(largeBookAdapter);
 

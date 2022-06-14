@@ -1,8 +1,9 @@
-package com.example.coursera.ui.book;
+package com.example.coursera.ui.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 import com.example.coursera.databinding.RowItemGridBinding;
 import com.example.coursera.model.Book;
+import com.example.coursera.model.Course;
+import com.example.coursera.ui.book.BookFragmentDirections;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,7 +33,16 @@ import java.io.IOException;
 
 public class SmallBookAdapter extends FirestoreRecyclerAdapter<Book, SmallBookAdapter.ViewHolder> {
     AppCompatActivity context;
+    public ClickListener listener;
 
+    public void setOnItemClickListener(ClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface ClickListener{
+        void onItemClick(View view, int position, Book model);
+
+    }
 
     public SmallBookAdapter(@NonNull FirestoreRecyclerOptions<Book> options_grid){
         super(options_grid);
@@ -81,8 +93,7 @@ public class SmallBookAdapter extends FirestoreRecyclerAdapter<Book, SmallBookAd
             e.printStackTrace();
         }
         holder.getBinding().bookItemSmall.setOnClickListener(view -> {
-            NavDirections action =  BookFragmentDirections.actionNavigationBookToBookDetailFragment(model);
-            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+            listener.onItemClick(holder.getBinding().getRoot(), position, model);
 
         });
 

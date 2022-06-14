@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.coursera.databinding.FragmentMateriBinding;
-import com.example.coursera.model.Course;
 import com.example.coursera.model.Materi;
+import com.example.coursera.ui.adapter.MateriAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 /**

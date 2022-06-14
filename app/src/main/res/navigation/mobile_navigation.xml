@@ -91,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_edit_profile"
-        android:name="com.example.coursera.ui.account.EditProfileFragment"
+        android:name="com.example.coursera.ui.account.editaccount.EditProfileFragment"
         android:label="@string/edit_account_fragment"
         tools:layout="@layout/fragment_edit_profile" >
         <argument

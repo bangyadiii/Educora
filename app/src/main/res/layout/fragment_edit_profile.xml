@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.coursera.ui.account.EditProfileFragment"
+    tools:context="com.example.coursera.ui.account.editaccount.EditProfileFragment"
     android:layout_marginBottom="50dp">
 
     <ScrollView

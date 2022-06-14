@@ -1,10 +1,11 @@
-package com.example.coursera.ui.home;
+package com.example.coursera.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.coursera.R;
 import com.example.coursera.databinding.ProgressClassItemBinding;
 import com.example.coursera.model.Course;
+import com.example.coursera.ui.home.HomeFragmentDirections;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,7 +33,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, ProgressCourseAdapter.CourseItemHolder> {
+public class CourseAdapter extends FirestoreRecyclerAdapter<Course, CourseAdapter.CourseItemHolder> {
     AppCompatActivity context;
 
 
@@ -42,10 +44,20 @@ public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, Prog
     public void setContext(AppCompatActivity context) {
         this.context = context;
     }
+    public ClickListener listener;
+
+    public void setOnItemClickListener(ClickListener listener){
+        this.listener = listener;
+    }
+
+    public static interface ClickListener{
+        void onItemClick(View view, int position, Course model);
+
+    }
 
 
 
-    public ProgressCourseAdapter(@NonNull FirestoreRecyclerOptions<Course> options) {
+    public CourseAdapter(@NonNull FirestoreRecyclerOptions<Course> options) {
         super(options);
     }
 
@@ -74,12 +86,8 @@ public class ProgressCourseAdapter extends FirestoreRecyclerAdapter<Course, Prog
     protected void onBindViewHolder(@NonNull CourseItemHolder holder, int position, @NonNull Course model) {
         holder.bind(model);
         holder.getBinding().cvProgressItem.setOnClickListener(v -> {
-//            NavOptions navOptions = new NavOptions.Builder()
-//                    .setPopUpTo(R.id.navigation_home, true)
-//                    .build();
-            Log.d("model", model.toString());
-            NavDirections action = (NavDirections) HomeFragmentDirections.actionNavigationHomeToDetailCourse(model.getId());
-            Navigation.findNavController(context.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+            listener.onItemClick(holder.getBinding().getRoot(), position, model);
+
 
         });
     }

@@ -1,4 +1,4 @@
-package com.example.coursera.ui.account;
+package com.example.coursera.ui.account.editaccount;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -148,7 +148,7 @@ public class EditProfileFragment extends Fragment {
                     loadingDialog.dissmisDialog();
                     if(task.isSuccessful()){
                         Toast.makeText(app, "berhasil update profile", Toast.LENGTH_SHORT).show();
-                        Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).popBackStack(R.id.action_navigation_edit_profile_to_navigation_account, true);
+                        Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).popBackStack(R.id.action_navigation_edit_profile_to_navigation_account, false);
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {

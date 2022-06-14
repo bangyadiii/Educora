@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,13 @@ import com.example.coursera.databinding.FragmentAccountBinding;
 import com.example.coursera.model.Book;
 import com.example.coursera.model.Course;
 import com.example.coursera.model.User;
+import com.example.coursera.ui.adapter.CourseAdapter;
+import com.example.coursera.ui.adapter.SmallBookAdapter;
+import com.example.coursera.ui.book.BookFragmentDirections;
 import com.example.coursera.ui.book.BookViewModel;
-import com.example.coursera.ui.book.SmallBookAdapter;
 import com.example.coursera.ui.helper.LoadingDialog;
 import com.example.coursera.ui.helper.VerticalSpaceItemDecoration;
 import com.example.coursera.ui.home.HomeViewModel;
-import com.example.coursera.ui.home.ProgressCourseAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,11 +52,11 @@ import java.io.IOException;
 
 
 public class AccountFragment extends Fragment {
-    AccountProgressCourseAdapter progressCourseAdapter;
+    CourseAdapter progressCourseAdapter;
     HomeViewModel homeViewModel;
     private FragmentAccountBinding binding;
     BookViewModel dashboardViewModel;
-    AccountSmallBookAdapter bookAdapterGrid;
+    SmallBookAdapter bookAdapterGrid;
     FirebaseAuth mAuth;
     User user;
     Activity activity;
@@ -73,31 +75,7 @@ public class AccountFragment extends Fragment {
         dashboardViewModel = new ViewModelProvider(this).get(BookViewModel.class);
         activity=  requireActivity();
 
-
-        mAuth  = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser() != null) {
-//            if (!queryDocumentSnapshots.isEmpty()) {
-//                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-//                    user = snapshot.toObject(User.class);
-//                    binding.accNama.setText(user.getName() != null ? user.getName() : "Default");
-//                }
-//            }
-            FirebaseUser fUser = mAuth.getCurrentUser();
-            FirebaseFirestore datau = FirebaseFirestore.getInstance();
-            datau.collection("users").document(fUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if (documentSnapshot.exists()) {
-
-                        user = documentSnapshot.toObject(User.class);
-                        binding.accNama.setText(user.getName() != null ? user.getName() : "Default");
-                        showAvatar();
-                    }
-
-                }
-            });
-        }
-
+        getCurrentUser();
 
         binding.changeProfile.setOnClickListener(view -> {
             LoadingDialog loadingDialog = LoadingDialog.getInstance(requireActivity());
@@ -153,7 +131,12 @@ public class AccountFragment extends Fragment {
         FirestoreRecyclerOptions<Course> options = new FirestoreRecyclerOptions.Builder<Course>()
                 .setQuery(homeViewModel.getAllCourses(), Course.class)
                 .build();
-        progressCourseAdapter = new AccountProgressCourseAdapter(options);
+        progressCourseAdapter = new CourseAdapter(options);
+        progressCourseAdapter.setOnItemClickListener((view, position, model) -> {
+            Log.d("model", model.toString());
+            NavDirections action = (NavDirections) AccountFragmentDirections.actionNavigationAccountToDetailCourse(model.getId());
+            Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+        });
         binding.rvCourse.setAdapter(progressCourseAdapter);
 
     }
@@ -167,7 +150,11 @@ public class AccountFragment extends Fragment {
                 .setQuery(dashboardViewModel.getAllBook(), Book.class)
                 .build();
 
-        bookAdapterGrid = new AccountSmallBookAdapter(options);
+        bookAdapterGrid = new SmallBookAdapter(options);
+        bookAdapterGrid.setOnItemClickListener((view, position, model) -> {
+            NavDirections action =  AccountFragmentDirections.actionNavigationAccountToBookDetailFragment(model);
+            Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+        });
         binding.recyclerView2.setAdapter(bookAdapterGrid);
     }
 
@@ -180,11 +167,13 @@ public class AccountFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                BitmapFactory.Options options = new BitmapFactory.Options();
+                                options.inSampleSize = 8;
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(), options);
 
-                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-//                ((ImageView) context.findViewById(R.id.image_view)).setImageBitmap(bitmap);
                                 Glide.with(activity)
                                         .load(bitmap)
+                                        .override(120, 120)
                                         .centerCrop()
                                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                                         .into(binding.avatar1);
@@ -199,6 +188,32 @@ public class AccountFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void getCurrentUser(){
+        mAuth  = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null) {
+//            if (!queryDocumentSnapshots.isEmpty()) {
+//                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+//                    user = snapshot.toObject(User.class);
+//                    binding.accNama.setText(user.getName() != null ? user.getName() : "Default");
+//                }
+//            }
+            FirebaseUser fUser = mAuth.getCurrentUser();
+            FirebaseFirestore datau = FirebaseFirestore.getInstance();
+            datau.collection("users").document(fUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        user = documentSnapshot.toObject(User.class);
+                        binding.accNama.setText(user.getName() != null ? user.getName() : "Name unkown :(");
+                        showAvatar();
+                    }
+
+                }
+            });
+        }
+
     }
 
 

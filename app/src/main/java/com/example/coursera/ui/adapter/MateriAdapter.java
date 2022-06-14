@@ -1,11 +1,6 @@
-package com.example.coursera.ui.home;
+package com.example.coursera.ui.adapter;
 
-import android.app.Application;
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coursera.R;
 import com.example.coursera.databinding.MateriItemBinding;
 import com.example.coursera.model.Materi;
+import com.example.coursera.ui.home.MateriFragmentDirections;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 

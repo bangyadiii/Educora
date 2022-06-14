@@ -6,13 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.coursera.R;
-
-
 import com.example.coursera.databinding.FragmentReadBookBinding;
 import com.example.coursera.ui.helper.LoadingDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,7 +39,7 @@ public class ReadBookFragment extends Fragment {
         return binding.getRoot();
 
         }catch (Exception e) {
-            Log.e("inflate", "onCreateView", e);
+            Log.d("inflate", "onCreateView", e);
         }
         return binding.getRoot();
 

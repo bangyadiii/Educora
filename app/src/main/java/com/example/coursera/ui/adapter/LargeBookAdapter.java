@@ -1,9 +1,10 @@
-package com.example.coursera.ui.book;
+package com.example.coursera.ui.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.example.coursera.R;
 
 import com.example.coursera.databinding.RowItemBinding;
 import com.example.coursera.model.Book;
+import com.example.coursera.ui.book.BookFragmentDirections;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +39,16 @@ public class LargeBookAdapter extends FirestoreRecyclerAdapter<Book, LargeBookAd
         super(options);
     }
 
+    public ClickListener listener;
+
+    public void setOnItemClickListener(ClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface ClickListener{
+        void onItemClick(View view, int position, Book model);
+
+    }
 
     @NonNull
     @Override
@@ -76,8 +88,8 @@ public class LargeBookAdapter extends FirestoreRecyclerAdapter<Book, LargeBookAd
         }
         holder.getRowItemGridBinding().textView1.setText(model.getTitle());
         holder.getRowItemGridBinding().cvBookItemLarge.setOnClickListener(view -> {
-            NavDirections action =  BookFragmentDirections.actionNavigationBookToBookDetailFragment(model);
-            Navigation.findNavController(act.findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+            listener.onItemClick(view, position, model);
+
         });
 
     }
