@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        binding.floatingActionButton.setOnClickListener(view -> {
-            showBottomSheet();
-        });
+//        binding.floatingActionButton.setOnClickListener(view -> {
+//            showBottomSheet();
+//        });
 
 
     }

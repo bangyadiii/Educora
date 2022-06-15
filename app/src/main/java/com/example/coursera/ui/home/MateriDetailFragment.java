@@ -264,7 +264,7 @@ public class MateriDetailFragment extends Fragment  {
                     app.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
                     app.findViewById(R.id.bottom_app_nav).setVisibility(View.VISIBLE);
                     app.findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
-                    app.findViewById(R.id.floatingActionButton).setVisibility(View.VISIBLE);
+//                    app.findViewById(R.id.floatingActionButton).setVisibility(View.VISIBLE);
 
 
                     if (app.getSupportActionBar() != null) {
@@ -287,7 +287,7 @@ public class MateriDetailFragment extends Fragment  {
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
                     app.findViewById(R.id.bottom_app_nav).setVisibility(View.GONE);
                     app.findViewById(R.id.nav_view).setVisibility(View.GONE);
-                    app.findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
+//                    app.findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
 
                     if (app.getSupportActionBar() != null) {
                         app.getSupportActionBar().hide();
