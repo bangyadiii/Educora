@@ -1,5 +1,6 @@
 package com.example.coursera.ui.book;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -100,6 +101,7 @@ public class BookDetailFragment extends Fragment {
             binding.tvAuthor.setText(book.getAuthor() != null ? book.getAuthor() : "Gatau" );
             binding.tvAuthorAnonim.setText(book.getAuthor() != null ? book.getAuthorAnonim() : "Juga gatau" );
             binding.btn1.setOnClickListener(view -> {
+
                 NavDirections action = BookDetailFragmentDirections.actionBookDetailFragmentToReadBookFragment(book);
                 Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
             });
@@ -122,6 +124,10 @@ public class BookDetailFragment extends Fragment {
                 .build();
 
         trendingBookAdapter = new SmallBookAdapter(options);
+        trendingBookAdapter.setOnItemClickListener((view, position, model) -> {
+            NavDirections action = BookDetailFragmentDirections.actionBookDetailFragmentSelf(book);
+            Navigation.findNavController(requireActivity().findViewById(R.id.nav_host_fragment_activity_main)).navigate(action);
+        });
         binding.rvDetailbook.setAdapter(trendingBookAdapter);
     }
 

@@ -13,6 +13,7 @@ public class Book implements Parcelable {
     String image_url;
     String author;
     String authorAnonim;
+    String pdf_url;
 
    
 
@@ -23,6 +24,7 @@ public class Book implements Parcelable {
         description = in.readString();
         author = in.readString();
         authorAnonim = in.readString();
+        pdf_url = in.readString();
     }
 
     public static final Creator<Book> CREATOR = new Creator<Book>() {
@@ -48,11 +50,14 @@ public class Book implements Parcelable {
 
     public Book(){}
 
-    public Book(String id,String title, String description, String image_url) {
+    public Book(String id,String title, String description, String image_url, String author, String authorAnonim, String pdf_url ) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.image_url = image_url;
+        this.author =  author;
+        this.authorAnonim = authorAnonim;
+        this.pdf_url = pdf_url;
     }
 
     public String getId() {
@@ -95,6 +100,14 @@ public class Book implements Parcelable {
         this.authorAnonim = authorAnonim;
     }
 
+    public String getPdf_url() {
+        return pdf_url;
+    }
+
+    public void setPdf_url(String pdf_url) {
+        this.pdf_url = pdf_url;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -108,6 +121,7 @@ public class Book implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(author);
         parcel.writeString(authorAnonim);
+        parcel.writeString(pdf_url);
 
     }
 }

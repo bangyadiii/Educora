@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="50dp"
     >
 
     <ScrollView
@@ -13,14 +13,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
+                android:clickable="false"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:duplicateParentState="false"
+                android:fadeScrollbars="false"
+                android:hapticFeedbackEnabled="false"
+                app:cardCornerRadius="20dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true"
+                app:guidelineUseRtl="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -37,7 +47,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:contentDescription="Iklan"
+                        android:cropToPadding="true"
                         android:src="@drawable/saly_17"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -67,14 +77,14 @@
                         app:layout_constraintStart_toStartOf="@+id/textView"
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="97dp"
-                        android:layout_height="36dp"
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_tombol_putih"
-                        android:text="Categories"
-                        android:textColor="@color/blue_primary"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+                        android:text="Button"
+                        android:textAllCaps="false"
                         app:layout_constraintStart_toStartOf="@+id/textHome"
                         app:layout_constraintTop_toBottomOf="@+id/textHome" />
 
@@ -85,8 +95,9 @@
             <TextView
                 android:id="@+id/title_welcome"
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="Welcome back \nSaymon!"
                 android:textColor="@color/black"
                 android:textSize="34sp"
@@ -98,7 +109,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="35dp"
                 android:background="@drawable/search_bg"
                 android:orientation="horizontal"
                 android:paddingEnd="10dp"
@@ -120,8 +131,7 @@
                     android:paddingEnd="20dp"
                     android:paddingBottom="11dp"
                     android:textSize="15sp"
-                    tools:ignore="TouchTargetSizeCheck"
-                    android:autofillHints="" />
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -136,7 +146,7 @@
                 android:id="@+id/tv_classinprogress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="Class in progress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -145,12 +155,13 @@
                 android:id="@+id/progressClassRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="386dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.478"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_classinprogress"
-                app:layout_constraintVertical_bias="0.103" >
+                app:layout_constraintVertical_bias="0.103">
 
             </androidx.recyclerview.widget.RecyclerView>
 

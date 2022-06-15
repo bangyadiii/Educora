@@ -114,6 +114,10 @@
             app:destination="@id/readBookFragment"
             app:popUpTo="@id/navigation_book"
             />
+        <action
+            android:id="@+id/action_bookDetailFragment_self"
+            app:destination="@id/bookDetailFragment"
+            app:popUpTo="@id/navigation_book"/>
     </fragment>
 
     <fragment
